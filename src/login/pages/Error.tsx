@@ -15,7 +15,7 @@ export default function Error(props: ErrorProps) {
 
     return (
         <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} headerNode={msg("errorTitle")}>
-            {message && <MessageAlert type={message.type} summary={message.summary} />}
+            <MessageAlert type={message.type} summary={message.summary} />
             {!skipLink && client?.baseUrl && (
                 <div>
                     <a href={client.baseUrl} data-action-button>
