@@ -24,6 +24,15 @@ const CDI_LOGOS: {
             "": "https://www.cdi.fau.de/en/",
             de: "https://www.cdi.fau.de/"
         }
+    },
+    {
+        lightUrl: cdiLightLogo,
+        darkUrl: cdiDarkLogo,
+        alt: "cdiLogoAlt",
+        href: {
+            "": "https://www.cdi.fau.de/en/",
+            de: "https://www.cdi.fau.de/"
+        }
     }
 ];
 

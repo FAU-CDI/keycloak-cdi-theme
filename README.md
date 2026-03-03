@@ -84,12 +84,8 @@ npx keycloakify initialize-email-theme
 -   account theme
 -   2FA themeing
 
--   Update logo
 -   English about page variant
 
-## Nice to Haves:
-
--   Logo
 -   Favicon
 
 ## LICENSE

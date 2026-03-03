@@ -115,6 +115,18 @@
     color: var(--cdi-foreground);
 }
 
+@media (max-width: 600px) {
+    .root header > div {
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
+    .root header > div > span {
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+}
+
 /* ----- Logo ----- */
 .root header img {
     display: block;
