@@ -177,7 +177,11 @@ function FooterButton(props: {
     } = props;
     const href = resolveHref(button.href, currentLanguage.languageTag);
 
-    return <a href={href} data-small={button.small}>{msg(button.type)}</a>;
+    return (
+        <a href={href} data-small={button.small}>
+            {msg(button.type)}
+        </a>
+    );
 }
 
 function resolveHref(href: Record<string, string>, currentLanguage: string): string {

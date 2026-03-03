@@ -84,7 +84,9 @@
 }
 
 /* ----- Read-only / disabled ----- */
-.form input:disabled,
+.form input[type="text"]:disabled,
+.form input[type="email"]:disabled,
+.form input[type="password"]:disabled,
 .form textarea:disabled,
 .form select:disabled {
     background: var(--cdi-readonly-bg);
@@ -111,42 +113,4 @@
     flex-wrap: wrap;
     gap: 0.5rem;
     align-items: center;
-}
-
-/* ----- Buttons ----- */
-.form input[type="submit"] {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border: 2px solid var(--cdi-primary);
-    border-radius: 0;
-    background: var(--cdi-primary);
-    color: var(--cdi-primary-contrast);
-    cursor: pointer;
-}
-
-.form input[type="submit"]:hover:not(:disabled) {
-    background: var(--cdi-primary-hover);
-    border-color: var(--cdi-primary-hover);
-}
-
-.form input[type="submit"]:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-}
-
-.form button[name="cancel-aia"] {
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    font-weight: 500;
-    border: 2px solid var(--cdi-border);
-    border-radius: 0;
-    background: var(--cdi-surface);
-    color: var(--cdi-foreground);
-    cursor: pointer;
-}
-
-.form button[name="cancel-aia"]:hover {
-    background: var(--cdi-surface-hover);
 }

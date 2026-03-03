@@ -53,9 +53,16 @@ export default function CdiUserProfileForm(props: CdiUserProfileFormProps) {
                     disabled={!isFormSubmittable}
                     type="submit"
                     value={msgStr("doSubmit")}
+                    data-action-button
                 />
                 {isAppInitiatedAction && (
-                    <button type="submit" name="cancel-aia" value="true" formNoValidate>
+                    <button
+                        type="submit"
+                        name="cancel-aia"
+                        value="true"
+                        formNoValidate
+                        data-second-button
+                    >
                         {msg("doCancel")}
                     </button>
                 )}

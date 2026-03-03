@@ -213,7 +213,7 @@ function LoginForm(props: LoginFormProps) {
 
             <div>
                 <input type="hidden" name="credentialId" value={auth.selectedCredential ?? ""} />
-                <input tabIndex={7} disabled={isLoginButtonDisabled} name="login" type="submit" value={msgStr("doLogIn")} />
+                <input tabIndex={7} disabled={isLoginButtonDisabled} name="login" type="submit" value={msgStr("doLogIn")} data-action-button />
             </div>
         </form>
     );
@@ -234,7 +234,7 @@ function SocialProviders(props: SocialProvidersProps) {
     return (
         <div className={styles.social}>
             {providers.map(p => (
-                <a key={p.alias} href={p.loginUrl} role="button">
+                <a key={p.alias} href={p.loginUrl} role="button" data-action-button>
                     {msgStr("cdiSelectInstitutionWith", kcSanitize(p.displayName))}
                 </a>
             ))}

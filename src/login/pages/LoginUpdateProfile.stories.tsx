@@ -29,7 +29,8 @@ export const DefaultEnglish: Story = {
             kcContext={{
                 realm,
                 locale: localeEN,
-                profile
+                profile,
+                isAppInitiatedAction: true
             }}
         />
     )
@@ -41,7 +42,8 @@ export const DefaultGerman: Story = {
             kcContext={{
                 realm,
                 locale: localeDE,
-                profile
+                profile,
+                isAppInitiatedAction: true
             }}
         />
     )
@@ -57,7 +59,7 @@ export const WithProfileErrorEnglish: Story = {
                     loginAction: "/mock-login-action"
                 },
                 messagesPerField: messagesPerField(["email"], "Invalid Email format."),
-                isAppInitiatedAction: false,
+                isAppInitiatedAction: true,
                 profile
             }}
         />
@@ -74,7 +76,7 @@ export const WithProfileErrorGerman: Story = {
                     loginAction: "/mock-login-action"
                 },
                 messagesPerField: messagesPerField(["email"], "Ungültiges Email format."),
-                isAppInitiatedAction: false
+                isAppInitiatedAction: true
             }}
         />
     )
