@@ -30,7 +30,7 @@ npm run storybook
 
 # Inside an actual keycloak.
 # This needs docker and maven.
-npx keycloakify start-keycloak --keycloak-version 26
+npx keycloak
 ```
 
 ### Building the theme
@@ -73,13 +73,7 @@ npx keycloakify initialize-account-theme
 npx keycloakify initialize-email-theme
 ```
 
--   404 page
--   Account already exists - link theme
-
 -   Logos
--   Header font size
--   mobile
-
 -   nice to have: email theme?
 -   account theme
 -   2FA themeing
