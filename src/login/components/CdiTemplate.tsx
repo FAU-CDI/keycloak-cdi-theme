@@ -6,12 +6,25 @@ import type { KcContext } from "../KcContext";
 import DarkModeToggle from "./DarkModeToggle";
 import LocaleSwitcher from "./LocaleSwitcher";
 
-import logoUrl from "../images/CDI_Logo_cmyk.svg";
-
+import cdiLightLogo from "../images/cdi-light.svg";
+import cdiDarkLogo from "../images/cdi-dark.svg";
 import styles from "./CdiTemplate.module.css";
 
-const CDI_LOGOS: { lightUrl: string; darkUrl: string; alt: Key }[] = [
-    { lightUrl: logoUrl, darkUrl: logoUrl, alt: "cdiLogoAlt" }
+const CDI_LOGOS: {
+    lightUrl: string;
+    darkUrl: string;
+    alt: Key;
+    href: Record<string, string>;
+}[] = [
+    {
+        lightUrl: cdiLightLogo,
+        darkUrl: cdiDarkLogo,
+        alt: "cdiLogoAlt",
+        href: {
+            "": "https://www.cdi.fau.de/en/",
+            de: "https://www.cdi.fau.de/"
+        }
+    }
 ];
 
 const CDI_FOOTER_ROWS: {
@@ -66,7 +79,7 @@ function getPreferredColorScheme(): boolean {
 export default function CdiTemplate(props: TemplateProps<KcContext, I18n>) {
     const { headerNode, documentTitle, kcContext, i18n, children } = props;
 
-    const { msg, msgStr, currentLanguage, enabledLanguages } = i18n;
+    const { msgStr, currentLanguage, enabledLanguages } = i18n;
     const [isDark, setIsDark] = useState(getPreferredColorScheme);
 
     const { realm } = kcContext;
@@ -107,11 +120,7 @@ export default function CdiTemplate(props: TemplateProps<KcContext, I18n>) {
                 <header>
                     <div>
                         {CDI_LOGOS.map((logo, idx) => (
-                            <img
-                                key={idx}
-                                src={isDark ? logo.darkUrl : logo.lightUrl}
-                                alt={msgStr(logo.alt)}
-                            />
+                            <Logo key={idx} isDark={isDark} logo={logo} i18n={i18n} />
                         ))}
                         <span>
                             {languageSwitcher}
@@ -124,27 +133,44 @@ export default function CdiTemplate(props: TemplateProps<KcContext, I18n>) {
                 <footer>
                     {CDI_FOOTER_ROWS.map((row, rowIndex) => (
                         <div key={rowIndex} className={styles.footerRow}>
-                            {row.map((button, index) => {
-                                const href =
-                                    button.href[currentLanguage?.languageTag ?? ""] ??
-                                    button.href[""] ??
-                                    "#";
-                                return (
-                                    <a
-                                        key={index}
-                                        href={href || "#"}
-                                        data-small={button.small}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >
-                                        {msg(button.type)}
-                                    </a>
-                                );
-                            })}
+                            {row.map((button, index) => (
+                                <FooterButton key={index} button={button} i18n={i18n} />
+                            ))}
                         </div>
                     ))}
                 </footer>
             </div>
         </div>
     );
+}
+
+function Logo(props: { isDark: boolean; logo: (typeof CDI_LOGOS)[number]; i18n: I18n }) {
+    const {
+        isDark,
+        logo: { lightUrl, darkUrl, alt, href },
+        i18n: { msgStr, currentLanguage }
+    } = props;
+    const resolvedHref = resolveHref(href, currentLanguage.languageTag);
+    return (
+        <a href={resolvedHref} target="_blank" rel="noreferrer">
+            <img src={isDark ? darkUrl : lightUrl} alt={msgStr(alt)} />
+        </a>
+    );
+}
+
+function FooterButton(props: {
+    button: (typeof CDI_FOOTER_ROWS)[number][number];
+    i18n: I18n;
+}) {
+    const {
+        button,
+        i18n: { msg, currentLanguage }
+    } = props;
+    const href = resolveHref(button.href, currentLanguage.languageTag);
+
+    return <a href={href} data-small={button.small}>{msg(button.type)}</a>;
+}
+
+function resolveHref(href: Record<string, string>, currentLanguage: string): string {
+    return href[currentLanguage] ?? href[""] ?? "#";
 }
