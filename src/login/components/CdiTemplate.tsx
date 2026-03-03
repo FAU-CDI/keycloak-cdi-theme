@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Component, type ErrorInfo, type ReactNode, useEffect, useState } from "react";
 import type { TemplateProps } from "keycloakify/login/TemplateProps";
 import { useInitialize } from "keycloakify/login/Template.useInitialize";
 import type { I18n, Key } from "../i18n";
@@ -124,32 +124,38 @@ export default function CdiTemplate(props: TemplateProps<KcContext, I18n>) {
     );
 
     return (
-        <div className={styles.root} data-theme={isDark ? "dark" : "light"}>
-            <div>
-                <header>
-                    <div>
-                        {CDI_LOGOS.map((logo, idx) => (
-                            <Logo key={idx} isDark={isDark} logo={logo} i18n={i18n} />
-                        ))}
-                        <span>
-                            {languageSwitcher}
-                            {darkModeToggle}
-                        </span>
-                    </div>
-                    <h1>{headerNode}</h1>
-                </header>
-                <main>{children}</main>
-                <footer>
-                    {CDI_FOOTER_ROWS.map((row, rowIndex) => (
-                        <div key={rowIndex} className={styles.footerRow}>
-                            {row.map((button, index) => (
-                                <FooterButton key={index} button={button} i18n={i18n} />
+        <ErrorBoundary>
+            <div className={styles.root} data-theme={isDark ? "dark" : "light"}>
+                <div>
+                    <header>
+                        <div>
+                            {CDI_LOGOS.map((logo, idx) => (
+                                <Logo key={idx} isDark={isDark} logo={logo} i18n={i18n} />
                             ))}
+                            <span>
+                                {languageSwitcher}
+                                {darkModeToggle}
+                            </span>
                         </div>
-                    ))}
-                </footer>
+                        <h1>{headerNode}</h1>
+                    </header>
+                    <main>{children}</main>
+                    <footer>
+                        {CDI_FOOTER_ROWS.map((row, rowIndex) => (
+                            <div key={rowIndex} className={styles.footerRow}>
+                                {row.map((button, index) => (
+                                    <FooterButton
+                                        key={index}
+                                        button={button}
+                                        i18n={i18n}
+                                    />
+                                ))}
+                            </div>
+                        ))}
+                    </footer>
+                </div>
             </div>
-        </div>
+        </ErrorBoundary>
     );
 }
 
@@ -186,4 +192,46 @@ function FooterButton(props: {
 
 function resolveHref(href: Record<string, string>, currentLanguage: string): string {
     return href[currentLanguage] ?? href[""] ?? "#";
+}
+
+type ErrorBoundaryProps = {
+    children: ReactNode;
+    fallback?: ReactNode;
+};
+
+type ErrorBoundaryState = {
+    hasError: boolean;
+};
+
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+    override state: ErrorBoundaryState = { hasError: false };
+
+    static getDerivedStateFromError(): ErrorBoundaryState {
+        return { hasError: true };
+    }
+
+    override componentDidCatch(error: Error, info: ErrorInfo): void {
+        console.error("CdiTemplate render error", { error, info });
+    }
+
+    override render(): ReactNode {
+        const { hasError } = this.state;
+        const { children, fallback } = this.props;
+
+        if (hasError) {
+            return (
+                fallback ?? (
+                    <div className={styles.root}>
+                        <div>
+                            <main>
+                                <p>Something went wrong while rendering this page.</p>
+                            </main>
+                        </div>
+                    </div>
+                )
+            );
+        }
+
+        return children;
+    }
 }

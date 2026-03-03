@@ -5,7 +5,7 @@ import { createKcPageStory } from "../KcPageStory";
 const { KcPageStory } = createKcPageStory({ pageId: "idp-review-user-profile.ftl" });
 
 const meta = {
-    title: "login/idp-review-user-profile.ftl",
+    title: "cdi/review-user-profile.ftl",
     component: KcPageStory
 } satisfies Meta<typeof KcPageStory>;
 
@@ -13,7 +13,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-import { realm, localeDE, localeEN, messagesPerField } from "./_stories_shared";
+import { realm, localeDE, localeEN, messagesPerField } from "./cdi_stories_shared";
 
 function randomUsername(): string {
     return `user_${Math.random().toString(36).slice(2, 10)}`;

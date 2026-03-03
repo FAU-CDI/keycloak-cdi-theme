@@ -11,7 +11,7 @@
 }
 
 .collapsible[open] {
-    max-height: 80vh;
+    max-height: none;
 }
 
 /* ----- Summary ----- */

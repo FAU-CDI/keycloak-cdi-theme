@@ -4,7 +4,7 @@ import { createKcPageStory } from "../KcPageStory";
 const { KcPageStory } = createKcPageStory({ pageId: "login-verify-email.ftl" });
 
 const meta = {
-    title: "login/login-verify-email.ftl",
+    title: "cdi/login-verify-email.ftl",
     component: KcPageStory
 } satisfies Meta<typeof KcPageStory>;
 
@@ -12,7 +12,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-import { localeEN, localeDE, realm } from "./_stories_shared";
+import { localeEN, localeDE, realm } from "./cdi_stories_shared";
 
 export const DefaultEnglish: Story = {
     render: () => (

@@ -44,12 +44,28 @@ type SocialProvider = {
 export default function Login(props: LoginPageProps) {
     const { kcContext, i18n } = props;
 
-    const { social, realm, url, usernameHidden, login, auth, message, isAppInitiatedAction, messagesPerField } = kcContext;
+    const {
+        social,
+        realm,
+        url,
+        usernameHidden,
+        login,
+        auth,
+        message,
+        isAppInitiatedAction,
+        messagesPerField,
+        enableWebAuthnConditionalUI,
+        registrationDisabled,
+        authenticators
+    } = kcContext;
 
     const { msg, msgStr } = i18n;
 
+    const webAuthnButtonId = useId();
+    const isPasswordEnabled = realm.password !== false;
+
     useScript({
-        webAuthnButtonId: "",
+        webAuthnButtonId,
         kcContext,
         i18n
     });
@@ -58,30 +74,47 @@ export default function Login(props: LoginPageProps) {
 
     const messageNode = showMessage && message ? <MessageAlert type={message.type} summary={message.summary} /> : null;
 
+    const hasSocialProviders = social?.providers !== undefined && social.providers.length > 0;
     const hasPrefilledOrError = !!login?.username?.trim() || messagesPerField.existsError("username", "password");
+    const defaultIsSSO = hasSocialProviders && !hasPrefilledOrError;
 
     const providersLogin =
-        realm.password && social?.providers !== undefined && social.providers.length > 0 ? (
-            <Collapsible label={msg("cdiSelectInstitution")} defaultOpen={!hasPrefilledOrError}>
-                {messageNode}
+        social?.providers !== undefined && social.providers.length > 0 ? (
+            <Collapsible label={msg("cdiSelectInstitution")} defaultOpen={defaultIsSSO}>
                 <p>{msg("cdiSelectInstitutionIntro")}</p>
                 <SocialProviders providers={social.providers} msgStr={msgStr} />
             </Collapsible>
         ) : null;
 
-    const nativeLogin = (
-        <Collapsible label={msg("cdiGivenLocalAccount")} defaultOpen={hasPrefilledOrError}>
+    const webAuthnConditionalSection =
+        isPasswordEnabled && enableWebAuthnConditionalUI ? (
+            <WebAuthnConditionalSection url={url} webAuthnButtonId={webAuthnButtonId} authenticators={authenticators} i18n={i18n} />
+        ) : null;
+    const nativeLogin = realm.password ? (
+        <Collapsible label={msg("cdiGivenLocalAccount")} defaultOpen={!defaultIsSSO}>
             <LoginForm
                 realm={realm}
                 url={url}
                 login={login}
                 auth={auth}
                 usernameHidden={usernameHidden}
+                enableWebAuthnConditionalUI={enableWebAuthnConditionalUI}
                 messagesPerField={messagesPerField}
                 i18n={i18n}
+                passwordEnabled={isPasswordEnabled}
             />
+            {webAuthnConditionalSection}
         </Collapsible>
-    );
+    ) : null;
+
+    const register =
+        realm.password && realm.registrationAllowed && !registrationDisabled ? (
+            <Collapsible label={msgStr("noAccount")} defaultOpen={false}>
+                <a tabIndex={8} href={url.registrationUrl} data-action-button role="button">
+                    {msgStr("doRegister")}
+                </a>
+            </Collapsible>
+        ) : null;
 
     return (
         <CdiTemplate
@@ -101,9 +134,11 @@ export default function Login(props: LoginPageProps) {
                 )
             }
         >
+            {messageNode}
             <p>{msg("cdiWelcomeText")}</p>
             {providersLogin}
             {nativeLogin}
+            {register}
         </CdiTemplate>
     );
 }
@@ -116,12 +151,14 @@ type LoginFormProps = {
     login: { username?: string; rememberMe?: boolean | string };
     auth: { selectedCredential?: string };
     usernameHidden?: boolean;
+    enableWebAuthnConditionalUI?: boolean;
     messagesPerField: MessagesPerField;
     i18n: I18n;
+    passwordEnabled: boolean;
 };
 
 function LoginForm(props: LoginFormProps) {
-    const { realm, url, login, auth, usernameHidden, messagesPerField, i18n } = props;
+    const { realm, url, login, auth, usernameHidden, enableWebAuthnConditionalUI, messagesPerField, i18n } = props;
     const { msg, msgStr } = i18n;
 
     const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
@@ -129,13 +166,12 @@ function LoginForm(props: LoginFormProps) {
     const usernameId = useId();
     const passwordId = useId();
     const rememberMeId = useId();
+
     const { isPasswordRevealed, toggleIsPasswordRevealed } = useIsPasswordRevealed({
         passwordInputId: passwordId
     });
 
     const hasFieldError = messagesPerField.existsError("username", "password");
-
-    if (!realm.password) return null;
 
     return (
         <form
@@ -167,7 +203,7 @@ function LoginForm(props: LoginFormProps) {
                         defaultValue={login.username ?? ""}
                         type="text"
                         autoFocus
-                        autoComplete="username"
+                        autoComplete={enableWebAuthnConditionalUI ? "username webauthn" : "username"}
                         aria-invalid={hasFieldError}
                     />
                 </div>
@@ -216,6 +252,47 @@ function LoginForm(props: LoginFormProps) {
                 <input tabIndex={7} disabled={isLoginButtonDisabled} name="login" type="submit" value={msgStr("doLogIn")} data-action-button />
             </div>
         </form>
+    );
+}
+
+type WebAuthnAuthenticators = {
+    authenticators: { credentialId: string }[];
+};
+
+type WebAuthnConditionalSectionProps = {
+    url: LoginFormProps["url"];
+    webAuthnButtonId: string;
+    authenticators?: WebAuthnAuthenticators;
+    i18n: I18n;
+};
+
+function WebAuthnConditionalSection(props: WebAuthnConditionalSectionProps) {
+    const { url, webAuthnButtonId, authenticators, i18n } = props;
+    const { msgStr } = i18n;
+
+    return (
+        <>
+            <form id="webauth" action={url.loginAction} method="post">
+                <input type="hidden" id="clientDataJSON" name="clientDataJSON" />
+                <input type="hidden" id="authenticatorData" name="authenticatorData" />
+                <input type="hidden" id="signature" name="signature" />
+                <input type="hidden" id="credentialId" name="credentialId" />
+                <input type="hidden" id="userHandle" name="userHandle" />
+                <input type="hidden" id="error" name="error" />
+            </form>
+
+            {authenticators !== undefined && authenticators.authenticators.length !== 0 && (
+                <form id="authn_select">
+                    {authenticators.authenticators.map((authenticator, index) => (
+                        <input key={index} type="hidden" name="authn_use_chk" readOnly value={authenticator.credentialId} />
+                    ))}
+                </form>
+            )}
+
+            <button id={webAuthnButtonId} type="button" data-action-button>
+                {msgStr("passkey-doAuthenticate")}
+            </button>
+        </>
     );
 }
 

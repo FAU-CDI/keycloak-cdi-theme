@@ -4,7 +4,7 @@ import { createKcPageStory } from "../KcPageStory";
 const { KcPageStory } = createKcPageStory({ pageId: "login-update-profile.ftl" });
 
 const meta = {
-    title: "login/login-update-profile.ftl",
+    title: "cdi/login-update-profile.ftl",
     component: KcPageStory
 } satisfies Meta<typeof KcPageStory>;
 
@@ -12,7 +12,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-import { realm, localeDE, localeEN, messagesPerField } from "./_stories_shared";
+import { realm, localeDE, localeEN, messagesPerField } from "./cdi_stories_shared";
 
 const profile = {
     attributesByName: {
