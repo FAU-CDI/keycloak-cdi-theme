@@ -68,15 +68,12 @@ You can customize this behavior, see documentation [here](https://docs.keycloaki
 
 # TODO
 
-```bash
-npx keycloakify initialize-account-theme
-npx keycloakify initialize-email-theme
-```
+-   Logos for FDM
+-   English about page variant
 
-Login theme pages:
+Nice to have login theme pages:
 
 -   [x] login.ftl
-    -   cdi-login.tpl
 -   [ ] login-username.ftl
 -   [ ] login-password.ftl
 -   [ ] webauthn-authenticate.ftl
@@ -115,14 +112,12 @@ Login theme pages:
 -   [ ] login-idp-link-confirm-override.ftl
 -   [ ] select-organization.ftl
 
--   Logos
--   nice to have: email theme?
--   account theme
--   2FA themeing
+Nice to have: - account theme - email theme
 
--   English about page variant
-
--   Favicon
+```bash
+npx keycloakify initialize-account-theme
+npx keycloakify initialize-email-theme
+```
 
 ## LICENSE
 
