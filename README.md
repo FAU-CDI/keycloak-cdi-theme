@@ -81,9 +81,13 @@ npx keycloakify initialize-email-theme
 - dark / light Logo variants
 - mobile
 
+
 - nice to have: email theme?
 - account theme
 - 2FA themeing
+
+- Update logo
+- English about page variant
 
 ## Nice to Haves:
 
