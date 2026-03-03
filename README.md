@@ -73,6 +73,18 @@ npx keycloakify initialize-account-theme
 npx keycloakify initialize-email-theme
 ```
 
+- 404 page
+- Account already exists - link theme
+
+- Logos
+- Header font size
+- dark / light Logo variants
+- mobile
+
+- nice to have: email theme?
+- account theme
+- 2FA themeing
+
 ## Nice to Haves:
 
 -   Logo

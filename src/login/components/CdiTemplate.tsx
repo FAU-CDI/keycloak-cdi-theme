@@ -23,8 +23,8 @@ const CDI_LOGOS: { url: string; alt: Key }[] = [
 
 const CDI_FOOTER_ROWS: CdiStaticButton[][] = [
     [
+        { type: "cdiAbout", href: { "": "https://www.fdm-bayern.org/sso/" } },
         { type: "cdiContactSupport", href: { "": "mailto:cdi-sso@fau.de" } },
-        { type: "cdiAbout", href: { "": "https://www.fdm-bayern.org/sso/" } }
     ],
     [
         {
