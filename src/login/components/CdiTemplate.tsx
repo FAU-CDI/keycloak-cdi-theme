@@ -10,21 +10,18 @@ import logoUrl from "../images/CDI_Logo_cmyk.svg";
 
 import styles from "./CdiTemplate.module.css";
 
-export type CdiStaticButton = {
+const CDI_LOGOS: { lightUrl: string; darkUrl: string; alt: Key }[] = [
+    { lightUrl: logoUrl, darkUrl: logoUrl, alt: "cdiLogoAlt" }
+];
+
+const CDI_FOOTER_ROWS: {
     type: Key;
     href: Record<string, string>;
     small?: boolean;
-};
-
-const CDI_LOGOS: { url: string; alt: Key }[] = [
-    { url: logoUrl, alt: "cdiLogoAlt" },
-    { url: logoUrl, alt: "cdiLogoAlt" }
-];
-
-const CDI_FOOTER_ROWS: CdiStaticButton[][] = [
+}[][] = [
     [
         { type: "cdiAbout", href: { "": "https://www.fdm-bayern.org/sso/" } },
-        { type: "cdiContactSupport", href: { "": "mailto:cdi-sso@fau.de" } },
+        { type: "cdiContactSupport", href: { "": "mailto:cdi-sso@fau.de" } }
     ],
     [
         {
@@ -110,7 +107,11 @@ export default function CdiTemplate(props: TemplateProps<KcContext, I18n>) {
                 <header>
                     <div>
                         {CDI_LOGOS.map((logo, idx) => (
-                            <img key={idx} src={logo.url} alt={msgStr(logo.alt)} />
+                            <img
+                                key={idx}
+                                src={isDark ? logo.darkUrl : logo.lightUrl}
+                                alt={msgStr(logo.alt)}
+                            />
                         ))}
                         <span>
                             {languageSwitcher}
