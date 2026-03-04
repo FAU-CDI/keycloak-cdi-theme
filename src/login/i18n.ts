@@ -25,7 +25,8 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             showPassword: "Show",
             hidePassword: "Hide",
             cdiUpdateProfileIntro:
-                "Please check the details above and click the Submit button to save. Your email address will need to be verified before your account can be used."
+                "Please check the details above and click the Submit button to save. Your email address will need to be verified before your account can be used.",
+            fdmBayernLogoAlt: "Bavarian Digital Alliance Logo"
         },
         de: {
             cdiSelectInstitution: "Institution wählen",
@@ -46,7 +47,8 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             showPassword: "Anzeigen",
             hidePassword: "Verbergen",
             cdiUpdateProfileIntro:
-                "Bitte prüfen Sie die Angaben oben und nutzen Sie den Absenden-Button, um die Änderungen zu speichern. Ihre E-Mail-Adresse muss verifiziert werden, bevor Sie Ihr Konto nutzen können."
+                "Bitte prüfen Sie die Angaben oben und nutzen Sie den Absenden-Button, um die Änderungen zu speichern. Ihre E-Mail-Adresse muss verifiziert werden, bevor Sie Ihr Konto nutzen können.",
+            fdmBayernLogoAlt: "Digitalverbund Bayern Logo"
         }
     })
     .build();

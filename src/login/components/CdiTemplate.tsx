@@ -8,6 +8,8 @@ import LocaleSwitcher from "./LocaleSwitcher";
 
 import cdiLightLogo from "../images/cdi-light.svg";
 import cdiDarkLogo from "../images/cdi-dark.svg";
+import dvbLightLogo from "../images/dvb-light.svg";
+import dvbDarkLogo from "../images/dvb-dark.svg";
 import styles from "./CdiTemplate.module.css";
 
 const CDI_LOGOS: {
@@ -26,12 +28,11 @@ const CDI_LOGOS: {
         }
     },
     {
-        lightUrl: cdiLightLogo,
-        darkUrl: cdiDarkLogo,
-        alt: "cdiLogoAlt",
+        lightUrl: dvbLightLogo,
+        darkUrl: dvbDarkLogo,
+        alt: "fdmBayernLogoAlt",
         href: {
-            "": "https://www.cdi.fau.de/en/",
-            de: "https://www.cdi.fau.de/"
+            "": "https://www.fdm-bayern.org/hits-fdm/",
         }
     }
 ];
