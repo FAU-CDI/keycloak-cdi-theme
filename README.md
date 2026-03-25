@@ -74,8 +74,8 @@ You can customize this behavior, see documentation [here](https://docs.keycloaki
 Nice to have login theme pages:
 
 -   [x] login.ftl
--   [ ] login-username.ftl
--   [ ] login-password.ftl
+-   [x] login-username.ftl
+-   [x] login-password.ftl
 -   [ ] webauthn-authenticate.ftl
 -   [ ] webauthn-register.ftl
 -   [ ] register.ftl

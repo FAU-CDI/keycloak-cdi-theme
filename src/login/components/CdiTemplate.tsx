@@ -32,7 +32,7 @@ const CDI_LOGOS: {
         darkUrl: dvbDarkLogo,
         alt: "fdmBayernLogoAlt",
         href: {
-            "": "https://www.fdm-bayern.org/hits-fdm/",
+            "": "https://www.fdm-bayern.org/hits-fdm/"
         }
     }
 ];

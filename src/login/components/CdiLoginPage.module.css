@@ -1,4 +1,4 @@
-/* Login page. Uses CDI variables from CdiTemplate .root. */
+/* Shared login page styles. Uses CDI variables from CdiTemplate .root. */
 
 /* ========== Login form ========== */
 
@@ -59,23 +59,23 @@
     border-color: var(--cdi-error-border);
 }
 
-.form .passwordGroup {
+.passwordGroup {
     display: flex;
     align-items: stretch;
     gap: 0;
 }
 
-.form .passwordGroup input {
+.passwordGroup input {
     border-radius: 0;
 }
 
-.form .passwordGroup[data-invalid="true"] button {
+.passwordGroup[data-invalid="true"] button {
     background: var(--cdi-error-bg);
     border-color: var(--cdi-error-border);
     color: var(--cdi-error-text);
 }
 
-.form .passwordGroup button {
+.passwordGroup button {
     padding: 0.5rem 0.75rem;
     border: 2px solid var(--cdi-border);
     border-left: none;
@@ -86,11 +86,11 @@
     color: var(--cdi-foreground);
 }
 
-.form .passwordGroup button:hover {
+.passwordGroup button:hover {
     background: var(--cdi-surface-hover);
 }
 
-.form .passwordGroup i::before {
+.passwordGroup i::before {
     content: attr(data-password-visibility-label);
     font-style: normal;
     font-weight: 500;
@@ -103,13 +103,13 @@
     gap: 0.5rem;
 }
 
-.form .optionsRow label,
-.form .optionsRow a {
+.optionsRow label,
+.optionsRow a {
     font-size: 0.9375rem;
     color: var(--cdi-foreground);
 }
 
-.form .optionsRow a:hover {
+.optionsRow a:hover {
     text-decoration: underline;
 }
 

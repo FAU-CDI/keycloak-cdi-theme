@@ -18,6 +18,8 @@ const IdpReviewUserProfile = lazy(() => import("./pages/IdpReviewUserProfile"));
 const Error = lazy(() => import("./pages/Error"));
 const LoginIdpLinkEmail = lazy(() => import("./pages/LoginIdpLinkEmail"));
 const LoginIdpLinkConfirm = lazy(() => import("./pages/LoginIdpLinkConfirm"));
+const LoginUsername = lazy(() => import("./pages/LoginUsername"));
+const LoginPassword = lazy(() => import("./pages/LoginPassword"));
 
 export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
@@ -49,6 +51,20 @@ export default function KcPage(props: { kcContext: KcContext }) {
                             <Login
                                 {...{ kcContext, i18n, classes }}
                                 doUseDefaultCss={false}
+                            />
+                        );
+                    case "login-username.ftl":
+                        return (
+                            <LoginUsername
+                                {...{ kcContext, i18n, classes }}
+                                doUseDefaultCss={true}
+                            />
+                        );
+                    case "login-password.ftl":
+                        return (
+                            <LoginPassword
+                                {...{ kcContext, i18n, classes }}
+                                doUseDefaultCss={true}
                             />
                         );
                     case "idp-review-user-profile.ftl":

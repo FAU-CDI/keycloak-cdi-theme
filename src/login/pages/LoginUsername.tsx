@@ -1,21 +1,14 @@
-/**
- * Login page (login.ftl): username/password + optional social providers.
- * Composes CdiTemplate with Collapsible sections. All Login UI in one file.
- */
 import { useId } from "react";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
-import { useScript } from "keycloakify/login/pages/Login.useScript";
-
+import { useScript } from "keycloakify/login/pages/LoginUsername.useScript";
 import CdiLoginPage from "../components/CdiLoginPage";
 
-type LoginKcContext = Extract<KcContext, { pageId: "login.ftl" }>;
-type LoginPageProps = Omit<PageProps<LoginKcContext, I18n>, "Template">;
+type LoginUsernameKcContext = Extract<KcContext, { pageId: "login-username.ftl" }>;
+type LoginUsernamePageProps = Omit<PageProps<LoginUsernameKcContext, I18n>, "Template">;
 
-/* ----- Login page ----- */
-
-export default function Login(props: LoginPageProps) {
+export default function LoginUsername(props: LoginUsernamePageProps) {
     const { kcContext, i18n } = props;
 
     const webAuthnButtonId = useId();
@@ -30,9 +23,11 @@ export default function Login(props: LoginPageProps) {
         <CdiLoginPage
             kcContext={kcContext}
             i18n={i18n}
-            variant="usernamePassword"
+            variant="username"
             webAuthnButtonId={webAuthnButtonId}
-            renderWebAuthnInsideNativeLogin={true}
+            renderWebAuthnInsideNativeLogin={false}
+            providersRequirePassword={true}
+            webAuthnRequiresPasswordEnabled={false}
         />
     );
 }
