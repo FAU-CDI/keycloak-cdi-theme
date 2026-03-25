@@ -1,0 +1,6 @@
+.item {
+    border: 2px solid var(--cdi-border);
+    background: var(--cdi-surface);
+    border-radius: 0;
+    padding: 0.75rem;
+}

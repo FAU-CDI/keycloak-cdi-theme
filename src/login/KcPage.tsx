@@ -20,6 +20,7 @@ const LoginIdpLinkEmail = lazy(() => import("./pages/LoginIdpLinkEmail"));
 const LoginIdpLinkConfirm = lazy(() => import("./pages/LoginIdpLinkConfirm"));
 const LoginUsername = lazy(() => import("./pages/LoginUsername"));
 const LoginPassword = lazy(() => import("./pages/LoginPassword"));
+const WebauthnAuthenticate = lazy(() => import("./pages/WebauthnAuthenticate"));
 
 export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
@@ -95,6 +96,13 @@ export default function KcPage(props: { kcContext: KcContext }) {
                             <LoginIdpLinkConfirm
                                 {...{ kcContext, i18n, classes }}
                                 doUseDefaultCss={false}
+                            />
+                        );
+                    case "webauthn-authenticate.ftl":
+                        return (
+                            <WebauthnAuthenticate
+                                {...{ kcContext, i18n, classes }}
+                                doUseDefaultCss={true}
                             />
                         );
                     default:
