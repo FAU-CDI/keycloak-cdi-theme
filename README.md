@@ -107,7 +107,7 @@ Nice to have login theme pages:
 -   [ ] login-recovery-authn-code-input.ftl
 -   [ ] login-reset-otp.ftl
 -   [ ] login-x509-info.ftl
--   [ ] webauthn-error.ftl
+-   [x] webauthn-error.ftl
 -   [ ] login-passkeys-conditional-authenticate.ftl
 -   [ ] login-idp-link-confirm-override.ftl
 -   [ ] select-organization.ftl

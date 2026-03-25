@@ -38,9 +38,7 @@ export default function WebauthnRegister(props: PageProps<Extract<KcContext, { p
 
                 <div className={formStyles.optionsRow} style={{ justifyContent: "flex-start" }}>
                     <label htmlFor="logout-sessions">
-                        <input type="checkbox" id="logout-sessions" name="logout-sessions" value="on" defaultChecked />
-                        {" "}
-                        {msg("logoutOtherSessions")}
+                        <input type="checkbox" id="logout-sessions" name="logout-sessions" value="on" defaultChecked /> {msg("logoutOtherSessions")}
                     </label>
                 </div>
 
