@@ -1,11 +1,11 @@
 import { useId, useState } from "react";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
-import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import Collapsible from "./Collapsible";
 import MessageAlert from "./MessageAlert";
 import CdiTemplate from "./CdiTemplate";
+import PasswordInputWithReveal from "./PasswordInputWithReveal";
 
 import styles from "./CdiLoginPage.module.css";
 
@@ -297,10 +297,9 @@ function LoginForm(props: LoginFormProps) {
 
     const passwordField =
         variant === "usernamePassword" || variant === "password" ? (
-            <PasswordField
+            <PasswordInputWithReveal
                 hasFieldError={hasFieldError}
-                msgStr={msgStr}
-                msg={msg}
+                i18n={i18n}
                 tabIndex={variant === "password" ? 2 : 3}
             />
         ) : null;
@@ -378,55 +377,6 @@ function LoginForm(props: LoginFormProps) {
                 />
             </div>
         </form>
-    );
-}
-
-function PasswordField(props: {
-    hasFieldError: boolean;
-    msg: I18n["msg"];
-    msgStr: I18n["msgStr"];
-    tabIndex: number;
-}) {
-    const { hasFieldError, msg, msgStr, tabIndex } = props;
-
-    const passwordId = useId();
-
-    const { isPasswordRevealed, toggleIsPasswordRevealed } = useIsPasswordRevealed({
-        passwordInputId: passwordId
-    });
-
-    return (
-        <div>
-            <label htmlFor={passwordId}>{msg("password")}</label>
-            <div
-                className={styles.passwordGroup}
-                data-invalid={hasFieldError ? "true" : undefined}
-            >
-                <input
-                    tabIndex={tabIndex}
-                    id={passwordId}
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    aria-invalid={hasFieldError}
-                />
-                <button
-                    type="button"
-                    aria-label={msgStr(
-                        isPasswordRevealed ? "hidePassword" : "showPassword"
-                    )}
-                    aria-controls={passwordId}
-                    onClick={toggleIsPasswordRevealed}
-                >
-                    <i
-                        aria-hidden
-                        data-password-visibility-label={msgStr(
-                            isPasswordRevealed ? "hidePassword" : "showPassword"
-                        )}
-                    />
-                </button>
-            </div>
-        </div>
     );
 }
 

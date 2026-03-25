@@ -1,11 +1,9 @@
-import type { JSX } from "keycloakify/tools/JSX";
+import type { ComponentPropsWithRef, ReactElement, ReactNode } from "react";
 import { useState } from "react";
-import type { LazyOrNot } from "keycloakify/tools/LazyOrNot";
-import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFormFieldsProps";
 import type { I18n } from "../i18n";
 
 import styles from "./CdiUserProfileForm.module.css";
-import { KcClsx } from "keycloakify/login/lib/kcClsx";
+import CdiUserProfileFormFields from "./CdiUserProfileFormFields";
 
 type KcContextWithProfile = {
     profile: unknown;
@@ -15,46 +13,66 @@ type KcContextWithProfile = {
 };
 
 export type CdiUserProfileFormProps = {
-    url: { loginAction: string };
+    formRef?: ComponentPropsWithRef<"form">["ref"];
+    action: string;
     isAppInitiatedAction?: boolean;
     i18n: I18n;
-    UserProfileFormFields: LazyOrNot<(props: UserProfileFormFieldsProps) => JSX.Element>;
     doMakeUserConfirmPassword: boolean;
     kcContext: KcContextWithProfile;
+    introNode?: ReactNode;
+    extraNode?: ReactNode;
+    footerNode?: ReactNode;
+    isSubmitDisabled?: boolean;
+    renderPrimaryButton?: (opts: { disabled: boolean; label: string }) => ReactElement;
+    submitLabel?: string;
 };
-
-const fakeKcClsx: KcClsx = () => "";
 
 export default function CdiUserProfileForm(props: CdiUserProfileFormProps) {
     const {
-        url,
+        formRef,
+        action,
         isAppInitiatedAction,
         i18n,
-        UserProfileFormFields,
         doMakeUserConfirmPassword,
-        kcContext
+        kcContext,
+        introNode,
+        extraNode,
+        footerNode,
+        isSubmitDisabled,
+        renderPrimaryButton,
+        submitLabel
     } = props;
 
     const { msg, msgStr } = i18n;
     const [isFormSubmittable, setIsFormSubmittable] = useState(false);
 
+    const resolvedSubmitLabel = submitLabel ?? msgStr("doSubmit");
+    const disabled = !isFormSubmittable || !!isSubmitDisabled;
+
     return (
-        <form className={styles.form} action={url.loginAction} method="post">
-            <UserProfileFormFields
+        <form ref={formRef} className={styles.form} action={action} method="post">
+            <CdiUserProfileFormFields
                 kcContext={kcContext}
                 i18n={i18n}
-                kcClsx={fakeKcClsx}
                 onIsFormSubmittableValueChange={setIsFormSubmittable}
                 doMakeUserConfirmPassword={doMakeUserConfirmPassword}
             />
-            <p className={styles.formIntro}>{msg("cdiUpdateProfileIntro")}</p>
+            {introNode !== undefined ? (
+                <p className={styles.formIntro}>{introNode}</p>
+            ) : null}
+            {extraNode}
+            {footerNode}
             <div className={styles.formActions}>
-                <input
-                    disabled={!isFormSubmittable}
-                    type="submit"
-                    value={msgStr("doSubmit")}
-                    data-action-button
-                />
+                {renderPrimaryButton !== undefined ? (
+                    renderPrimaryButton({ disabled, label: resolvedSubmitLabel })
+                ) : (
+                    <input
+                        disabled={disabled}
+                        type="submit"
+                        value={resolvedSubmitLabel}
+                        data-action-button
+                    />
+                )}
                 {isAppInitiatedAction && (
                     <button
                         type="submit"

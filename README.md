@@ -78,7 +78,7 @@ Nice to have login theme pages:
 -   [x] login-password.ftl
 -   [x] webauthn-authenticate.ftl
 -   [x] webauthn-register.ftl
--   [ ] register.ftl
+-   [x] register.ftl
 -   [ ] info.ftl
 -   [x] error.ftl
 -   [ ] login-reset-password.ftl

@@ -23,6 +23,7 @@ const LoginPassword = lazy(() => import("./pages/LoginPassword"));
 const WebauthnAuthenticate = lazy(() => import("./pages/WebauthnAuthenticate"));
 const WebauthnRegister = lazy(() => import("./pages/WebauthnRegister"));
 const WebauthnError = lazy(() => import("./pages/WebauthnError"));
+const Register = lazy(() => import("./pages/Register"));
 
 export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
@@ -45,8 +46,6 @@ export default function KcPage(props: { kcContext: KcContext }) {
                             <LoginUpdateProfile
                                 {...{ kcContext, i18n, classes }}
                                 doUseDefaultCss={false}
-                                UserProfileFormFields={UserProfileFormFields}
-                                doMakeUserConfirmPassword={doMakeUserConfirmPassword}
                             />
                         );
                     case "login.ftl":
@@ -75,8 +74,6 @@ export default function KcPage(props: { kcContext: KcContext }) {
                             <IdpReviewUserProfile
                                 {...{ kcContext, i18n, classes }}
                                 doUseDefaultCss={false}
-                                UserProfileFormFields={UserProfileFormFields}
-                                doMakeUserConfirmPassword={doMakeUserConfirmPassword}
                             />
                         );
                     case "error.ftl":
@@ -121,6 +118,13 @@ export default function KcPage(props: { kcContext: KcContext }) {
                                 {...{ kcContext, i18n, classes }}
                                 Template={Template}
                                 doUseDefaultCss={true}
+                            />
+                        );
+                    case "register.ftl":
+                        return (
+                            <Register
+                                {...{ kcContext, i18n, classes }}
+                                doUseDefaultCss={false}
                             />
                         );
                     default:

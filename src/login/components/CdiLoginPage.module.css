@@ -69,7 +69,8 @@
     border-radius: 0;
 }
 
-.passwordGroup[data-invalid="true"] button {
+.passwordGroup[data-invalid="true"] button,
+.passwordGroup:has(input[aria-invalid="true"]) button {
     background: var(--cdi-error-bg);
     border-color: var(--cdi-error-border);
     color: var(--cdi-error-text);
@@ -90,10 +91,18 @@
     background: var(--cdi-surface-hover);
 }
 
-.passwordGroup i::before {
-    content: attr(data-password-visibility-label);
-    font-style: normal;
-    font-weight: 500;
+.revealButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    padding: 0 0.5rem;
+}
+
+.revealIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+    display: block;
 }
 
 .optionsRow {
