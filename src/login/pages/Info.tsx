@@ -15,20 +15,14 @@ export default function Info(props: InfoProps) {
 
     const { messageHeader, message, requiredActions, skipLink, pageRedirectUri, actionUri, client } = kcContext;
 
-    const headerHtml = kcSanitize(
-        messageHeader ? advancedMsgStr(messageHeader) : (message?.summary ?? "")
-    );
+    const headerHtml = kcSanitize(messageHeader ? advancedMsgStr(messageHeader) : message?.summary ?? "");
 
     const messageType = message?.type ?? "info";
 
     const requiredActionsNode =
         requiredActions && requiredActions.length > 0 ? (
             <p>
-                <strong>
-                    {requiredActions
-                        .map(requiredAction => advancedMsgStr(`requiredAction.${requiredAction}`))
-                        .join(", ")}
-                </strong>
+                <strong>{requiredActions.map(requiredAction => advancedMsgStr(`requiredAction.${requiredAction}`)).join(", ")}</strong>
             </p>
         ) : null;
 
