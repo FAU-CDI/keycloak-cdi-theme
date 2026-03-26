@@ -24,6 +24,7 @@ const WebauthnAuthenticate = lazy(() => import("./pages/WebauthnAuthenticate"));
 const WebauthnRegister = lazy(() => import("./pages/WebauthnRegister"));
 const WebauthnError = lazy(() => import("./pages/WebauthnError"));
 const Register = lazy(() => import("./pages/Register"));
+const Info = lazy(() => import("./pages/Info"));
 
 export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
@@ -123,6 +124,13 @@ export default function KcPage(props: { kcContext: KcContext }) {
                     case "register.ftl":
                         return (
                             <Register
+                                {...{ kcContext, i18n, classes }}
+                                doUseDefaultCss={false}
+                            />
+                        );
+                    case "info.ftl":
+                        return (
+                            <Info
                                 {...{ kcContext, i18n, classes }}
                                 doUseDefaultCss={false}
                             />
