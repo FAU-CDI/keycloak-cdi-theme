@@ -73,44 +73,44 @@ You can customize this behavior, see documentation [here](https://docs.keycloaki
 
 Nice to have login theme pages:
 
--   [x] login.ftl
--   [x] login-username.ftl
--   [x] login-password.ftl
--   [x] webauthn-authenticate.ftl
--   [x] webauthn-register.ftl
--   [x] register.ftl
--   [x] info.ftl
--   [x] error.ftl
--   [x] login-reset-password.ftl
--   [x] login-verify-email.ftl
--   [x] terms.ftl
--   [ ] login-oauth2-device-verify-user-code.ftl
--   [ ] login-oauth-grant.ftl
--   [ ] login-otp.ftl
--   [x] login-update-profile.ftl
--   [ ] login-update-password.ftl
--   [ ] link-idp-action.ftl
--   [x] login-idp-link-confirm.ftl
--   [x] login-idp-link-email.ftl
--   [ ] login-page-expired.ftl
--   [ ] login-config-totp.ftl
--   [ ] logout-confirm.ftl
--   [x] idp-review-user-profile.ftl
--   [ ] update-email.ftl
--   [ ] select-authenticator.ftl
--   [ ] saml-post-form.ftl
--   [ ] delete-credential.ftl
--   [ ] code.ftl
+-   [x] code.ftl
 -   [ ] delete-account-confirm.ftl
+-   [ ] delete-credential.ftl
 -   [ ] frontchannel-logout.ftl
+-   [ ] link-idp-action.ftl
+-   [ ] login-config-totp.ftl
+-   [ ] login-idp-link-confirm-override.ftl
+-   [ ] login-oauth-grant.ftl
+-   [ ] login-oauth2-device-verify-user-code.ftl
+-   [ ] login-otp.ftl
+-   [ ] login-page-expired.ftl
+-   [ ] login-passkeys-conditional-authenticate.ftl
 -   [ ] login-recovery-authn-code-config.ftl
 -   [ ] login-recovery-authn-code-input.ftl
 -   [ ] login-reset-otp.ftl
+-   [ ] login-update-password.ftl
 -   [ ] login-x509-info.ftl
--   [x] webauthn-error.ftl
--   [ ] login-passkeys-conditional-authenticate.ftl
--   [ ] login-idp-link-confirm-override.ftl
+-   [ ] logout-confirm.ftl
+-   [ ] saml-post-form.ftl
+-   [ ] select-authenticator.ftl
 -   [ ] select-organization.ftl
+-   [ ] update-email.ftl
+-   [x] error.ftl
+-   [x] idp-review-user-profile.ftl
+-   [x] info.ftl
+-   [x] login-idp-link-confirm.ftl
+-   [x] login-idp-link-email.ftl
+-   [x] login-password.ftl
+-   [x] login-reset-password.ftl
+-   [x] login-update-profile.ftl
+-   [x] login-username.ftl
+-   [x] login-verify-email.ftl
+-   [x] login.ftl
+-   [x] register.ftl
+-   [x] terms.ftl
+-   [x] webauthn-authenticate.ftl
+-   [x] webauthn-error.ftl
+-   [x] webauthn-register.ftl
 
 Nice to have: - account theme - email theme
 

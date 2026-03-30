@@ -27,6 +27,7 @@ const Register = lazy(() => import("./pages/Register"));
 const Info = lazy(() => import("./pages/Info"));
 const LoginResetPassword = lazy(() => import("./pages/LoginResetPassword"));
 const Terms = lazy(() => import("./pages/Terms"));
+const Code = lazy(() => import("./pages/Code"));
 
 export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
@@ -147,6 +148,13 @@ export default function KcPage(props: { kcContext: KcContext }) {
                     case "terms.ftl":
                         return (
                             <Terms
+                                {...{ kcContext, i18n, classes }}
+                                doUseDefaultCss={false}
+                            />
+                        );
+                    case "code.ftl":
+                        return (
+                            <Code
                                 {...{ kcContext, i18n, classes }}
                                 doUseDefaultCss={false}
                             />
