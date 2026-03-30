@@ -73,8 +73,8 @@ You can customize this behavior, see documentation [here](https://docs.keycloaki
 
 Nice to have login theme pages:
 
--   [x] code.ftl
--   [ ] delete-account-confirm.ftl
+
+-   [x] delete-account-confirm.ftl
 -   [ ] delete-credential.ftl
 -   [ ] frontchannel-logout.ftl
 -   [ ] link-idp-action.ftl
@@ -95,6 +95,7 @@ Nice to have login theme pages:
 -   [ ] select-authenticator.ftl
 -   [ ] select-organization.ftl
 -   [ ] update-email.ftl
+-   [x] code.ftl
 -   [x] error.ftl
 -   [x] idp-review-user-profile.ftl
 -   [x] info.ftl

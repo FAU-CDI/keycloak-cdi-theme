@@ -1,0 +1,11 @@
+.list {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
