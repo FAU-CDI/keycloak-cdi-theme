@@ -33,6 +33,7 @@ const DeleteCredential = lazy(() => import("./pages/DeleteCredential"));
 const FrontchannelLogout = lazy(() => import("./pages/FrontchannelLogout"));
 const LinkIdpAction = lazy(() => import("./pages/LinkIdpAction"));
 const LoginConfigTotp = lazy(() => import("./pages/LoginConfigTotp"));
+const LoginIdpLinkConfirmOverride = lazy(() => import("./pages/LoginIdpLinkConfirmOverride"));
 
 export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
@@ -196,6 +197,13 @@ export default function KcPage(props: { kcContext: KcContext }) {
                     case "login-config-totp.ftl":
                         return (
                             <LoginConfigTotp
+                                {...{ kcContext, i18n, classes }}
+                                doUseDefaultCss={false}
+                            />
+                        );
+                    case "login-idp-link-confirm-override.ftl":
+                        return (
+                            <LoginIdpLinkConfirmOverride
                                 {...{ kcContext, i18n, classes }}
                                 doUseDefaultCss={false}
                             />
