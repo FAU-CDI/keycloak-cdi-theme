@@ -26,12 +26,12 @@ export const DefaultEnglish: Story = {
                 },
                 client: {
                     attributes: {
-                        logoUri: "https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg",
-                        policyUri: "https://twitter.com/en/tos",
-                        tosUri: "https://twitter.com/en/privacy"
+                        logoUri: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Commons-logo.svg",
+                        policyUri: "https://example.org/privacy",
+                        tosUri: "https://example.org/terms"
                     },
-                    name: "Twitter",
-                    clientId: "twitter-client-id"
+                    name: "Fancy ELN",
+                    clientId: "fancy-eln"
                 }
             }}
         />
@@ -51,12 +51,12 @@ export const DefaultGerman: Story = {
                 },
                 client: {
                     attributes: {
-                        logoUri: "https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg",
-                        policyUri: "https://twitter.com/en/tos",
-                        tosUri: "https://twitter.com/en/privacy"
+                        logoUri: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Commons-logo.svg",
+                        policyUri: "https://example.org/privacy",
+                        tosUri: "https://example.org/terms"
                     },
-                    name: "Twitter",
-                    clientId: "twitter-client-id"
+                    name: "Fancy ELN",
+                    clientId: "fancy-eln"
                 }
             }}
         />

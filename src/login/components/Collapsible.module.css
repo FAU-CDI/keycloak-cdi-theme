@@ -19,14 +19,18 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    flex-wrap: wrap;
     width: 100%;
     padding: 0.75rem 1rem;
+    box-sizing: border-box;
     font-size: 1rem;
     font-weight: 500;
     color: var(--cdi-foreground);
     background: var(--cdi-surface);
     cursor: pointer;
     list-style: none;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
 
 .collapsible summary::-webkit-details-marker {
