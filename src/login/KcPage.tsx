@@ -30,6 +30,7 @@ const Terms = lazy(() => import("./pages/Terms"));
 const Code = lazy(() => import("./pages/Code"));
 const DeleteAccountConfirm = lazy(() => import("./pages/DeleteAccountConfirm"));
 const DeleteCredential = lazy(() => import("./pages/DeleteCredential"));
+const FrontchannelLogout = lazy(() => import("./pages/FrontchannelLogout"));
 
 export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
@@ -173,6 +174,13 @@ export default function KcPage(props: { kcContext: KcContext }) {
                             <DeleteCredential
                                 {...{ kcContext, i18n, classes }}
                                 Template={Template}
+                                doUseDefaultCss={false}
+                            />
+                        );
+                    case "frontchannel-logout.ftl":
+                        return (
+                            <FrontchannelLogout
+                                {...{ kcContext, i18n, classes }}
                                 doUseDefaultCss={false}
                             />
                         );
