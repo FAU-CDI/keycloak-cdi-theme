@@ -33,7 +33,10 @@ const DeleteCredential = lazy(() => import("./pages/DeleteCredential"));
 const FrontchannelLogout = lazy(() => import("./pages/FrontchannelLogout"));
 const LinkIdpAction = lazy(() => import("./pages/LinkIdpAction"));
 const LoginConfigTotp = lazy(() => import("./pages/LoginConfigTotp"));
-const LoginIdpLinkConfirmOverride = lazy(() => import("./pages/LoginIdpLinkConfirmOverride"));
+const LoginIdpLinkConfirmOverride = lazy(
+    () => import("./pages/LoginIdpLinkConfirmOverride")
+);
+const LoginOauthGrant = lazy(() => import("./pages/LoginOauthGrant"));
 
 export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
@@ -206,6 +209,14 @@ export default function KcPage(props: { kcContext: KcContext }) {
                             <LoginIdpLinkConfirmOverride
                                 {...{ kcContext, i18n, classes }}
                                 doUseDefaultCss={false}
+                            />
+                        );
+                    case "login-oauth-grant.ftl":
+                        return (
+                            <LoginOauthGrant
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
                             />
                         );
                     default:

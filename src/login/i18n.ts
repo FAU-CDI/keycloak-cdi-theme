@@ -27,6 +27,10 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             cdiUpdateProfileIntro:
                 "Please check the details above and click the Submit button to save. Your email address will need to be verified before your account can be used.",
             fdmBayernLogoAlt: "Bavarian Digital Alliance Logo",
+            cdiOauthGrantIntroText:
+                "Has requested access to the following privileges. Before sending any data to the application, you need to confirm it.",
+            oauthGrantTos: "Terms of Service",
+            oauthGrantPolicy: "Privacy Policy",
             loginTotpStep1:
                 'Install an authenticator app or password manager that supports <a href="https://en.wikipedia.org/wiki/Time-based_one-time_password" target="_blank" rel="noreferrer">TOTP</a>. Your platform\'s default password manager may also support TOTP.'
         },
@@ -51,6 +55,10 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             cdiUpdateProfileIntro:
                 "Bitte prüfen Sie die Angaben oben und nutzen Sie den Absenden-Button, um die Änderungen zu speichern. Ihre E-Mail-Adresse muss verifiziert werden, bevor Sie Ihr Konto nutzen können.",
             fdmBayernLogoAlt: "Digitalverbund Bayern Logo",
+            cdiOauthGrantIntroText:
+                "Hat Zugriff auf die folgenden Berechtigungen angefordert. Bevor Daten an die Anwendung gesendet werden, müssen Sie dies bestätigen.",
+            oauthGrantTos: "Nutzungsbedingungen",
+            oauthGrantPolicy: "Datenschutzerklärung",
             loginTotpStep1:
                 'Installieren Sie eine Authenticator-App oder einen Passwortmanager, der <a href="https://de.wikipedia.org/wiki/Time-based_one-time_password" target="_blank" rel="noreferrer">TOTP</a> unterstützt. Der Standard-Passwortmanager Ihrer Plattform unterstützt TOTP möglicherweise bereits.'
         }

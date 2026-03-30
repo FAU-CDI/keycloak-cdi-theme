@@ -74,8 +74,7 @@ You can customize this behavior, see documentation [here](https://docs.keycloaki
 Nice to have login theme pages:
 
 
--   [x] login-idp-link-confirm-override.ftl
--   [ ] login-oauth-grant.ftl
+
 -   [ ] login-oauth2-device-verify-user-code.ftl
 -   [ ] login-otp.ftl
 -   [ ] login-page-expired.ftl
@@ -99,8 +98,10 @@ Nice to have login theme pages:
 -   [x] info.ftl
 -   [x] link-idp-action.ftl
 -   [x] login-config-totp.ftl
+-   [x] login-idp-link-confirm-override.ftl
 -   [x] login-idp-link-confirm.ftl
 -   [x] login-idp-link-email.ftl
+-   [x] login-oauth-grant.ftl
 -   [x] login-password.ftl
 -   [x] login-reset-password.ftl
 -   [x] login-update-profile.ftl

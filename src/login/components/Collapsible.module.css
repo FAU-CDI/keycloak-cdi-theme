@@ -54,6 +54,23 @@
     background: var(--cdi-surface-hover);
 }
 
+/* Non-toggleable variant: hide chevron + remove hover/cursor affordance */
+.collapsible[data-frozen="true"] summary {
+    cursor: default;
+}
+
+.collapsible[data-frozen="true"] summary::before {
+    content: none;
+}
+
+.collapsible[data-frozen="true"] summary:hover {
+    background: var(--cdi-surface);
+}
+
+.collapsible[data-frozen="true"] summary {
+    border-bottom: 2px solid var(--cdi-border);
+}
+
 /* ----- Content (expandable body) ----- */
 .collapsible > div {
     display: flex;
