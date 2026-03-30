@@ -1,0 +1,70 @@
+/* Minimal page-specific styles for login-config-totp.ftl. */
+
+.steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: cdi-step;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.steps > li {
+    counter-increment: cdi-step;
+    position: relative;
+    padding-left: 3rem;
+}
+
+.steps > li::before {
+    content: counter(cdi-step);
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--cdi-border);
+    background: var(--cdi-surface-alt);
+    color: var(--cdi-foreground);
+    font-weight: 700;
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+.apps {
+    margin: 0.5rem 0 0;
+    padding-left: 1.25rem;
+}
+
+.secretRow {
+    margin-top: 0.5rem;
+}
+
+.secret {
+    display: block;
+    padding: 0.75rem;
+    border: 2px solid var(--cdi-border);
+    background: var(--cdi-surface-alt);
+    color: var(--cdi-foreground);
+    word-break: break-all;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+        "Courier New", monospace;
+    font-size: 0.9375rem;
+}
+
+.qr {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    border: 2px solid var(--cdi-border);
+    background: var(--cdi-surface);
+}
+
+.policyList {
+    margin: 0;
+    padding-left: 1.25rem;
+}
