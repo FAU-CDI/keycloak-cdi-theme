@@ -122,10 +122,12 @@ npx keycloakify initialize-email-theme
 
 ## LICENSE
 
-This code is not currently licensed.
+The code is dervied from the original keycloakify code.
+This code is licensed under [AGPL-3.0](./LICENSE).
+This license does not include the logos, which are not licensed.
+Additionally CDI and HITS may use the software without modification to offer the CDI / SSO HITS Login service, even if such usage is not allowed by the AGPL license.
 
-The original code was licensed under:
-
+The code was originally licensed under the following terms:
 ```
 MIT License
 
