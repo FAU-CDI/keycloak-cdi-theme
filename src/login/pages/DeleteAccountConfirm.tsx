@@ -3,6 +3,7 @@ import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
 import MessageAlert from "../components/MessageAlert";
+import { CDIActions, CDIButton } from "../components/CDIButton";
 import styles from "./DeleteAccountConfirm.module.css";
 
 type DeleteAccountConfirmKcContext = Extract<KcContext, { pageId: "delete-account-confirm.ftl" }>;
@@ -16,13 +17,7 @@ export default function DeleteAccountConfirm(props: DeleteAccountConfirmProps) {
     const { msg, msgStr } = i18n;
 
     return (
-        <CdiTemplate
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={false}
-            displayMessage={false}
-            headerNode={msg("deleteAccountConfirm")}
-        >
+        <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} displayMessage={false} headerNode={msg("deleteAccountConfirm")}>
             <MessageAlert type="warning" summary={msgStr("irreversibleAction")} />
 
             <p>{msg("deletingImplies")}</p>
@@ -35,22 +30,16 @@ export default function DeleteAccountConfirm(props: DeleteAccountConfirmProps) {
             <p>{msg("finalDeletionConfirmation")}</p>
 
             <form action={url.loginAction} method="post">
-                <div className={styles.actions}>
-                    <button type="submit" name="accept" value="true" data-action-button>
+                <CDIActions>
+                    <CDIButton type="submit" name="accept" value="true">
                         {msgStr("doConfirmDelete")}
-                    </button>
+                    </CDIButton>
                     {triggered_from_aia && (
-                        <button
-                            type="submit"
-                            name="cancel-aia"
-                            value="true"
-                            formNoValidate
-                            data-second-button
-                        >
+                        <CDIButton secondary type="submit" name="cancel-aia" value="true" formNoValidate>
                             {msgStr("doCancel")}
-                        </button>
+                        </CDIButton>
                     )}
-                </div>
+                </CDIActions>
             </form>
         </CdiTemplate>
     );

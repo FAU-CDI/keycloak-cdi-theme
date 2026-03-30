@@ -3,6 +3,7 @@ import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
 import MessageAlert from "../components/MessageAlert";
+import { CDIButton } from "../components/CDIButton";
 
 export default function WebauthnError(props: PageProps<Extract<KcContext, { pageId: "webauthn-error.ftl" }>, I18n>) {
     const { kcContext, i18n } = props;
@@ -24,12 +25,11 @@ export default function WebauthnError(props: PageProps<Extract<KcContext, { page
             </form>
 
             <div>
-                <button
+                <CDIButton
                     tabIndex={4}
                     type="button"
                     name="try-again"
                     id="kc-try-again"
-                    data-action-button
                     onClick={() => {
                         (document.getElementById("isSetRetry") as HTMLInputElement | null)?.setAttribute("value", "retry");
                         (document.getElementById("executionValue") as HTMLInputElement | null)?.setAttribute("value", "${execution}");
@@ -37,13 +37,13 @@ export default function WebauthnError(props: PageProps<Extract<KcContext, { page
                     }}
                 >
                     {msgStr("doTryAgain")}
-                </button>
+                </CDIButton>
             </div>
             {isAppInitiatedAction && (
                 <form action={url.loginAction} id="kc-webauthn-settings-form" method="post">
-                    <button type="submit" id="cancelWebAuthnAIA" name="cancel-aia" value="true" data-second-button>
+                    <CDIButton secondary type="submit" id="cancelWebAuthnAIA" name="cancel-aia" value="true">
                         {msgStr("doCancel")}
-                    </button>
+                    </CDIButton>
                 </form>
             )}
         </CdiTemplate>

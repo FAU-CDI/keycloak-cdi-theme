@@ -2,7 +2,7 @@ import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
-import styles from "./DeleteCredential.module.css";
+import { CDIActions, CDIButton } from "../components/CDIButton";
 
 type DeleteCredentialKcContext = Extract<KcContext, { pageId: "delete-credential.ftl" }>;
 
@@ -24,14 +24,14 @@ export default function DeleteCredential(props: PageProps<DeleteCredentialKcCont
             <p>{msg("deleteCredentialMessage", credentialLabel)}</p>
 
             <form action={url.loginAction} method="post">
-                <div className={styles.actions}>
-                    <button name="accept" type="submit" data-action-button>
+                <CDIActions>
+                    <CDIButton name="accept" type="submit">
                         {msgStr("doConfirmDelete")}
-                    </button>
-                    <button name="cancel-aia" type="submit" data-second-button>
+                    </CDIButton>
+                    <CDIButton secondary name="cancel-aia" type="submit">
                         {msgStr("doCancel")}
-                    </button>
-                </div>
+                    </CDIButton>
+                </CDIActions>
             </form>
         </CdiTemplate>
     );

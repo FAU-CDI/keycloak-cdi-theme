@@ -1,6 +1,7 @@
 import type { ComponentPropsWithRef, ReactElement, ReactNode } from "react";
 import { useState } from "react";
 import type { I18n } from "../i18n";
+import { CDIActions, CDIButton } from "./CDIButton";
 
 import styles from "./CdiUserProfileForm.module.css";
 import CdiUserProfileFormFields from "./CdiUserProfileFormFields";
@@ -62,29 +63,29 @@ export default function CdiUserProfileForm(props: CdiUserProfileFormProps) {
             ) : null}
             {extraNode}
             {footerNode}
-            <div className={styles.formActions}>
+            <CDIActions layout="rowWrap">
                 {renderPrimaryButton !== undefined ? (
                     renderPrimaryButton({ disabled, label: resolvedSubmitLabel })
                 ) : (
-                    <input
+                    <CDIButton
+                        as="input"
                         disabled={disabled}
                         type="submit"
                         value={resolvedSubmitLabel}
-                        data-action-button
                     />
                 )}
                 {isAppInitiatedAction && (
-                    <button
+                    <CDIButton
+                        secondary
                         type="submit"
                         name="cancel-aia"
                         value="true"
                         formNoValidate
-                        data-second-button
                     >
                         {msg("doCancel")}
-                    </button>
+                    </CDIButton>
                 )}
-            </div>
+            </CDIActions>
         </form>
     );
 }

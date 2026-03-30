@@ -111,14 +111,6 @@
     border-color: var(--cdi-error-border);
 }
 
-/* ----- Form actions ----- */
-.formActions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    align-items: center;
-}
-
 /* ----- Layout (CdiUserProfileFormFields; no Keycloak kcClsx) ----- */
 .labelWrapper {
     display: flex;

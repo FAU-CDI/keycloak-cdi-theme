@@ -6,6 +6,7 @@ import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
 import CdiUserProfileForm from "../components/CdiUserProfileForm";
 import MessageAlert from "../components/MessageAlert";
+import { CDIButton } from "../components/CDIButton";
 
 type RegisterKcContext = Extract<KcContext, { pageId: "register.ftl" }>;
 type RegisterProps = Omit<PageProps<RegisterKcContext, I18n>, "Template">;
@@ -73,25 +74,24 @@ export default function Register(props: RegisterProps) {
                 }
                 footerNode={
                     <div>
-                        <a href={url.loginUrl} data-second-button role="button">
+                        <CDIButton as="a" href={url.loginUrl} secondary role="button">
                             {msg("backToLogin")}
-                        </a>
+                        </CDIButton>
                     </div>
                 }
                 renderPrimaryButton={
                     recaptchaRequired && !recaptchaVisible && recaptchaAction !== undefined
                         ? ({ disabled, label }) => (
-                              <button
+                              <CDIButton
                                   className="g-recaptcha"
                                   data-sitekey={recaptchaSiteKey}
                                   data-callback="onSubmitRecaptcha"
                                   data-action={recaptchaAction}
                                   type="submit"
                                   disabled={disabled}
-                                  data-action-button
                               >
                                   {label}
-                              </button>
+                              </CDIButton>
                           )
                         : undefined
                 }

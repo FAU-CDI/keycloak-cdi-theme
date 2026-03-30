@@ -3,7 +3,7 @@ import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
-import styles from "./Terms.module.css";
+import { CDIActions, CDIButton } from "../components/CDIButton";
 
 type TermsKcContext = Extract<KcContext, { pageId: "terms.ftl" }>;
 type TermsProps = Omit<PageProps<TermsKcContext, I18n>, "Template">;
@@ -24,14 +24,14 @@ export default function Terms(props: TermsProps) {
             />
 
             <form action={url.loginAction} method="post">
-                <div className={styles.actions}>
-                    <button name="accept" type="submit" data-action-button>
+                <CDIActions>
+                    <CDIButton name="accept" type="submit">
                         {msgStr("doAccept")}
-                    </button>
-                    <button name="cancel" type="submit" data-second-button>
+                    </CDIButton>
+                    <CDIButton secondary name="cancel" type="submit">
                         {msgStr("doDecline")}
-                    </button>
-                </div>
+                    </CDIButton>
+                </CDIActions>
             </form>
         </CdiTemplate>
     );

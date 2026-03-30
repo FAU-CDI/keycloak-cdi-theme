@@ -4,6 +4,7 @@ import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
 import MessageAlert from "../components/MessageAlert";
+import { CDIButton } from "../components/CDIButton";
 
 import formStyles from "../components/CdiLoginPage.module.css";
 
@@ -44,9 +45,9 @@ export default function WebauthnRegister(props: PageProps<Extract<KcContext, { p
 
                 <div className={formStyles.form}>
                     <div>
-                        <button id={authButtonId} type="submit" data-action-button>
+                        <CDIButton id={authButtonId} type="submit">
                             {msgStr("doRegisterSecurityKey")}
-                        </button>
+                        </CDIButton>
                     </div>
                 </div>
             </form>
@@ -55,9 +56,9 @@ export default function WebauthnRegister(props: PageProps<Extract<KcContext, { p
                 <form action={url.loginAction} id="kc-webauthn-settings-form" method="post">
                     <div className={formStyles.form}>
                         <div>
-                            <button type="submit" id="cancelWebAuthnAIA" name="cancel-aia" value="true" data-second-button>
+                            <CDIButton secondary type="submit" id="cancelWebAuthnAIA" name="cancel-aia" value="true">
                                 {msg("doCancel")}
-                            </button>
+                            </CDIButton>
                         </div>
                     </div>
                 </form>

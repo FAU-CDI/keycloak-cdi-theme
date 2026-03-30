@@ -5,6 +5,7 @@ import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
 import MessageAlert from "../components/MessageAlert";
 import styles from "../components/CdiLoginPage.module.css";
+import { CDIButton } from "../components/CDIButton";
 
 type LoginResetPasswordKcContext = Extract<KcContext, { pageId: "login-reset-password.ftl" }>;
 type LoginResetPasswordProps = Omit<PageProps<LoginResetPasswordKcContext, I18n>, "Template">;
@@ -51,15 +52,13 @@ export default function LoginResetPassword(props: LoginResetPasswordProps) {
                 </div>
 
                 <div>
-                    <a href={url.loginUrl} data-second-button role="button">
+                    <CDIButton as="a" href={url.loginUrl} secondary role="button">
                         {msg("backToLogin")}
-                    </a>
+                    </CDIButton>
                 </div>
 
                 <div>
-                    <button type="submit" data-action-button>
-                        {msgStr("doSubmit")}
-                    </button>
+                    <CDIButton type="submit">{msgStr("doSubmit")}</CDIButton>
                 </div>
             </form>
         </CdiTemplate>

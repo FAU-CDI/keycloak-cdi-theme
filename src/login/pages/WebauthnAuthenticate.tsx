@@ -7,6 +7,7 @@ import CdiTemplate from "../components/CdiTemplate";
 import Collapsible from "../components/Collapsible";
 import MessageAlert from "../components/MessageAlert";
 import BoxedListItem from "../components/BoxedListItem";
+import { CDIButton } from "../components/CDIButton";
 
 import styles from "../components/CdiLoginPage.module.css";
 
@@ -34,9 +35,9 @@ export default function WebauthnAuthenticate(props: WebauthnAuthenticatePageProp
     const showRegister = realm.registrationAllowed && !registrationDisabled && url.registrationUrl !== undefined;
     const registerNode = showRegister ? (
         <Collapsible label={msgStr("noAccount")} defaultOpen={false}>
-            <a tabIndex={6} href={url.registrationUrl} data-action-button role="button">
+            <CDIButton as="a" tabIndex={6} href={url.registrationUrl} role="button">
                 {msgStr("doRegister")}
-            </a>
+            </CDIButton>
         </Collapsible>
     ) : null;
 
@@ -110,9 +111,9 @@ export default function WebauthnAuthenticate(props: WebauthnAuthenticatePageProp
 
             <div className={styles.form}>
                 <div>
-                    <button id={authButtonId} type="button" autoFocus data-action-button>
+                    <CDIButton id={authButtonId} type="button" autoFocus>
                         {msgStr("webauthn-doAuthenticate")}
-                    </button>
+                    </CDIButton>
                 </div>
             </div>
 

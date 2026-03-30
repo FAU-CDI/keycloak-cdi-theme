@@ -4,6 +4,7 @@ import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
 import MessageAlert from "../components/MessageAlert";
+import { CDIButton } from "../components/CDIButton";
 
 type InfoKcContext = Extract<KcContext, { pageId: "info.ftl" }>;
 type InfoProps = Omit<PageProps<InfoKcContext, I18n>, "Template">;
@@ -31,25 +32,25 @@ export default function Info(props: InfoProps) {
 
         if (pageRedirectUri) {
             return (
-                <a href={pageRedirectUri} data-action-button>
+                <CDIButton as="a" href={pageRedirectUri}>
                     {msg("backToApplication")}
-                </a>
+                </CDIButton>
             );
         }
 
         if (actionUri) {
             return (
-                <a href={actionUri} data-action-button>
+                <CDIButton as="a" href={actionUri}>
                     {msg("proceedWithAction")}
-                </a>
+                </CDIButton>
             );
         }
 
         if (client?.baseUrl) {
             return (
-                <a href={client.baseUrl} data-action-button>
+                <CDIButton as="a" href={client.baseUrl}>
                     {msg("backToApplication")}
-                </a>
+                </CDIButton>
             );
         }
 

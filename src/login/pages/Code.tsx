@@ -15,18 +15,10 @@ export default function Code(props: CodeProps) {
 
     const { msg } = i18n;
 
-    const headerNode = code.success
-        ? msg("codeSuccessTitle")
-        : msg("codeErrorTitle", code.error);
+    const headerNode = code.success ? msg("codeSuccessTitle") : msg("codeErrorTitle", code.error);
 
     return (
-        <CdiTemplate
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={false}
-            displayMessage={false}
-            headerNode={headerNode}
-        >
+        <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} displayMessage={false} headerNode={headerNode}>
             {code.success ? (
                 <>
                     <p>{msg("copyCodeInstruction")}</p>

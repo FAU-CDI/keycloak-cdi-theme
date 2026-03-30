@@ -6,6 +6,7 @@ import Collapsible from "./Collapsible";
 import MessageAlert from "./MessageAlert";
 import CdiTemplate from "./CdiTemplate";
 import PasswordInputWithReveal from "./PasswordInputWithReveal";
+import { CDIButton } from "./CDIButton";
 
 import styles from "./CdiLoginPage.module.css";
 
@@ -185,9 +186,9 @@ export default function CdiLoginPage(props: CdiLoginPageProps) {
         !!url.registrationUrl;
     const register = showRegister ? (
         <Collapsible label={msgStr("noAccount")} defaultOpen={false}>
-            <a tabIndex={8} href={url.registrationUrl} data-action-button role="button">
+            <CDIButton as="a" tabIndex={8} href={url.registrationUrl} role="button">
                 {msgStr("doRegister")}
-            </a>
+            </CDIButton>
         </Collapsible>
     ) : null;
 
@@ -367,13 +368,13 @@ function LoginForm(props: LoginFormProps) {
                         value={auth.selectedCredential ?? ""}
                     />
                 )}
-                <input
+                <CDIButton
+                    as="input"
                     tabIndex={submitTabIndex}
                     disabled={isLoginButtonDisabled}
                     name="login"
                     type="submit"
                     value={msgStr("doLogIn")}
-                    data-action-button
                 />
             </div>
         </form>
@@ -417,9 +418,9 @@ function WebAuthnConditionalSection(props: WebAuthnConditionalSectionProps) {
                     </form>
                 )}
 
-            <button id={webAuthnButtonId} type="button" data-action-button>
+            <CDIButton id={webAuthnButtonId} type="button">
                 {msgStr("passkey-doAuthenticate")}
-            </button>
+            </CDIButton>
         </>
     );
 }
@@ -437,9 +438,9 @@ function SocialProviders(props: SocialProvidersProps) {
     return (
         <div className={styles.social}>
             {providers.map(p => (
-                <a key={p.alias} href={p.loginUrl} role="button" data-action-button>
+                <CDIButton as="a" key={p.alias} href={p.loginUrl} role="button">
                     {msgStr("cdiSelectInstitutionWith", kcSanitize(p.displayName))}
-                </a>
+                </CDIButton>
             ))}
         </div>
     );

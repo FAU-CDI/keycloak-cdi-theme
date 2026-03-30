@@ -3,6 +3,7 @@ import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
 import MessageAlert from "../components/MessageAlert";
+import { CDIButton } from "../components/CDIButton";
 
 type ErrorKcContext = Extract<KcContext, { pageId: "error.ftl" }>;
 type ErrorProps = Omit<PageProps<ErrorKcContext, I18n>, "Template">;
@@ -18,9 +19,9 @@ export default function Error(props: ErrorProps) {
             <MessageAlert type={message.type} summary={message.summary} />
             {!skipLink && client?.baseUrl && (
                 <div>
-                    <a href={client.baseUrl} data-action-button>
+                    <CDIButton as="a" href={client.baseUrl}>
                         {msg("backToApplication")}
-                    </a>
+                    </CDIButton>
                 </div>
             )}
         </CdiTemplate>
