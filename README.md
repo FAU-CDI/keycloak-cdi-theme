@@ -83,7 +83,7 @@ Nice to have login theme pages:
 -   [x] error.ftl
 -   [x] login-reset-password.ftl
 -   [x] login-verify-email.ftl
--   [ ] terms.ftl
+-   [x] terms.ftl
 -   [ ] login-oauth2-device-verify-user-code.ftl
 -   [ ] login-oauth-grant.ftl
 -   [ ] login-otp.ftl

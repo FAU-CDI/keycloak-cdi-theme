@@ -26,6 +26,7 @@ const WebauthnError = lazy(() => import("./pages/WebauthnError"));
 const Register = lazy(() => import("./pages/Register"));
 const Info = lazy(() => import("./pages/Info"));
 const LoginResetPassword = lazy(() => import("./pages/LoginResetPassword"));
+const Terms = lazy(() => import("./pages/Terms"));
 
 export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
@@ -139,6 +140,13 @@ export default function KcPage(props: { kcContext: KcContext }) {
                     case "login-reset-password.ftl":
                         return (
                             <LoginResetPassword
+                                {...{ kcContext, i18n, classes }}
+                                doUseDefaultCss={false}
+                            />
+                        );
+                    case "terms.ftl":
+                        return (
+                            <Terms
                                 {...{ kcContext, i18n, classes }}
                                 doUseDefaultCss={false}
                             />
