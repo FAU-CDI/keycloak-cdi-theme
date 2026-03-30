@@ -31,6 +31,7 @@ const Code = lazy(() => import("./pages/Code"));
 const DeleteAccountConfirm = lazy(() => import("./pages/DeleteAccountConfirm"));
 const DeleteCredential = lazy(() => import("./pages/DeleteCredential"));
 const FrontchannelLogout = lazy(() => import("./pages/FrontchannelLogout"));
+const LinkIdpAction = lazy(() => import("./pages/LinkIdpAction"));
 
 export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
@@ -180,6 +181,13 @@ export default function KcPage(props: { kcContext: KcContext }) {
                     case "frontchannel-logout.ftl":
                         return (
                             <FrontchannelLogout
+                                {...{ kcContext, i18n, classes }}
+                                doUseDefaultCss={false}
+                            />
+                        );
+                    case "link-idp-action.ftl":
+                        return (
+                            <LinkIdpAction
                                 {...{ kcContext, i18n, classes }}
                                 doUseDefaultCss={false}
                             />
