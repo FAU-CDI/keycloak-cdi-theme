@@ -37,6 +37,7 @@ const LoginIdpLinkConfirmOverride = lazy(
     () => import("./pages/LoginIdpLinkConfirmOverride")
 );
 const LoginOauthGrant = lazy(() => import("./pages/LoginOauthGrant"));
+const SamlPostForm = lazy(() => import("./pages/SamlPostForm"));
 
 export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
@@ -214,6 +215,14 @@ export default function KcPage(props: { kcContext: KcContext }) {
                     case "login-oauth-grant.ftl":
                         return (
                             <LoginOauthGrant
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                            />
+                        );
+                    case "saml-post-form.ftl":
+                        return (
+                            <SamlPostForm
                                 {...{ kcContext, i18n, classes }}
                                 Template={Template}
                                 doUseDefaultCss={true}

@@ -85,7 +85,7 @@ Nice to have login theme pages:
 -   [ ] login-update-password.ftl
 -   [ ] login-x509-info.ftl
 -   [ ] logout-confirm.ftl
--   [ ] saml-post-form.ftl
+-   [x] saml-post-form.ftl
 -   [ ] select-authenticator.ftl
 -   [ ] select-organization.ftl
 -   [ ] update-email.ftl
