@@ -75,7 +75,6 @@ Nice to have login theme pages:
 
 
 
--   [ ] login-otp.ftl
 -   [ ] login-page-expired.ftl
 -   [ ] login-passkeys-conditional-authenticate.ftl
 -   [ ] login-recovery-authn-code-config.ftl
@@ -101,6 +100,7 @@ Nice to have login theme pages:
 -   [x] login-idp-link-email.ftl
 -   [x] login-oauth-grant.ftl
 -   [x] login-oauth2-device-verify-user-code.ftl
+-   [x] login-otp.ftl
 -   [x] login-password.ftl
 -   [x] login-reset-password.ftl
 -   [x] login-update-profile.ftl

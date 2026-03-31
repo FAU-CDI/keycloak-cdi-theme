@@ -34,6 +34,7 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             cdiOauthGrantDeny: "Deny access",
             oauthGrantTos: "Terms of Service",
             oauthGrantPolicy: "Privacy Policy",
+            loginOtpSelectAuthenticator: "Select device",
             loginTotpStep1:
                 'Install an authenticator app or password manager that supports <a href="https://en.wikipedia.org/wiki/Time-based_one-time_password" target="_blank" rel="noreferrer">TOTP</a>. Your platform\'s default password manager may also support TOTP.'
         },
@@ -65,6 +66,7 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             cdiOauthGrantDeny: "Zugang verweigern",
             oauthGrantTos: "Nutzungsbedingungen",
             oauthGrantPolicy: "Datenschutzerklärung",
+            loginOtpSelectAuthenticator: "Gerät wählen",
             loginTotpStep1:
                 'Installieren Sie eine Authenticator-App oder einen Passwortmanager, der <a href="https://de.wikipedia.org/wiki/Time-based_one-time_password" target="_blank" rel="noreferrer">TOTP</a> unterstützt. Der Standard-Passwortmanager Ihrer Plattform unterstützt TOTP möglicherweise bereits.'
         }

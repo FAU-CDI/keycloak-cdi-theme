@@ -41,6 +41,7 @@ const SamlPostForm = lazy(() => import("./pages/SamlPostForm"));
 const LoginOauth2DeviceVerifyUserCode = lazy(
     () => import("./pages/LoginOauth2DeviceVerifyUserCode")
 );
+const LoginOtp = lazy(() => import("./pages/LoginOtp"));
 
 export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
@@ -234,6 +235,14 @@ export default function KcPage(props: { kcContext: KcContext }) {
                     case "login-oauth2-device-verify-user-code.ftl":
                         return (
                             <LoginOauth2DeviceVerifyUserCode
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                            />
+                        );
+                    case "login-otp.ftl":
+                        return (
+                            <LoginOtp
                                 {...{ kcContext, i18n, classes }}
                                 Template={Template}
                                 doUseDefaultCss={true}
