@@ -75,7 +75,6 @@ Nice to have login theme pages:
 
 
 
--   [ ] login-oauth2-device-verify-user-code.ftl
 -   [ ] login-otp.ftl
 -   [ ] login-page-expired.ftl
 -   [ ] login-passkeys-conditional-authenticate.ftl
@@ -85,7 +84,6 @@ Nice to have login theme pages:
 -   [ ] login-update-password.ftl
 -   [ ] login-x509-info.ftl
 -   [ ] logout-confirm.ftl
--   [x] saml-post-form.ftl
 -   [ ] select-authenticator.ftl
 -   [ ] select-organization.ftl
 -   [ ] update-email.ftl
@@ -102,6 +100,7 @@ Nice to have login theme pages:
 -   [x] login-idp-link-confirm.ftl
 -   [x] login-idp-link-email.ftl
 -   [x] login-oauth-grant.ftl
+-   [x] login-oauth2-device-verify-user-code.ftl
 -   [x] login-password.ftl
 -   [x] login-reset-password.ftl
 -   [x] login-update-profile.ftl
@@ -109,6 +108,7 @@ Nice to have login theme pages:
 -   [x] login-verify-email.ftl
 -   [x] login.ftl
 -   [x] register.ftl
+-   [x] saml-post-form.ftl
 -   [x] terms.ftl
 -   [x] webauthn-authenticate.ftl
 -   [x] webauthn-error.ftl
