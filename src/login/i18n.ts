@@ -28,7 +28,10 @@ const { useI18n, ofTypeI18n } = i18nBuilder
                 "Please check the details above and click the Submit button to save. Your email address will need to be verified before your account can be used.",
             fdmBayernLogoAlt: "Bavarian Digital Alliance Logo",
             cdiOauthGrantIntroText:
-                "Has requested access to the following privileges. Before sending any data to the application, you need to confirm it.",
+                "has requested access to the following privileges. Before sending any data to the application, you need to confirm it.",
+            cdiOauthGrantTitle: "Grant {0} access",
+            cdiOauthGrantAccept: "Grant access",
+            cdiOauthGrantDeny: "Deny access",
             oauthGrantTos: "Terms of Service",
             oauthGrantPolicy: "Privacy Policy",
             loginTotpStep1:
@@ -56,7 +59,10 @@ const { useI18n, ofTypeI18n } = i18nBuilder
                 "Bitte prüfen Sie die Angaben oben und nutzen Sie den Absenden-Button, um die Änderungen zu speichern. Ihre E-Mail-Adresse muss verifiziert werden, bevor Sie Ihr Konto nutzen können.",
             fdmBayernLogoAlt: "Digitalverbund Bayern Logo",
             cdiOauthGrantIntroText:
-                "Hat Zugriff auf die folgenden Berechtigungen angefordert. Bevor Daten an die Anwendung gesendet werden, müssen Sie dies bestätigen.",
+                "hat Zugriff auf die folgenden Berechtigungen angefordert. Bevor Daten an die Anwendung gesendet werden, müssen Sie dies bestätigen.",
+            cdiOauthGrantTitle: "{0} Zugang gewähren",
+            cdiOauthGrantAccept: "Zugang gewähren",
+            cdiOauthGrantDeny: "Zugang verweigern",
             oauthGrantTos: "Nutzungsbedingungen",
             oauthGrantPolicy: "Datenschutzerklärung",
             loginTotpStep1:

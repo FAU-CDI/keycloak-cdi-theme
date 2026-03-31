@@ -21,7 +21,7 @@ export const DefaultEnglish: Story = {
                 locale: localeEN,
                 url: { oauthAction: "/oauth-action" },
                 oauth: {
-                    clientScopesRequested: [{ consentScreenText: "Scope1", dynamicScopeParameter: "dynamicScope1" }, { consentScreenText: "Scope2" }],
+                    clientScopesRequested: [{ consentScreenText: "Profile", dynamicScopeParameter: "Email" }, { consentScreenText: "Organization" }],
                     code: "mockCode"
                 },
                 client: {
@@ -46,7 +46,7 @@ export const DefaultGerman: Story = {
                 locale: localeDE,
                 url: { oauthAction: "/oauth-action" },
                 oauth: {
-                    clientScopesRequested: [{ consentScreenText: "Scope1", dynamicScopeParameter: "dynamicScope1" }, { consentScreenText: "Scope2" }],
+                    clientScopesRequested: [{ consentScreenText: "Profil", dynamicScopeParameter: "Email" }, { consentScreenText: "Organisation" }],
                     code: "mockCode"
                 },
                 client: {

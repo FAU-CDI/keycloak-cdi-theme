@@ -19,7 +19,7 @@ export default function LoginOauthGrant(props: PageProps<Extract<KcContext, { pa
     const applicationName = client.name ? advancedMsgStr(client.name) : client.clientId;
 
     return (
-        <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} headerNode={msg("oauthGrantTitle", applicationName)}>
+        <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} headerNode={msg("cdiOauthGrantTitle", applicationName)}>
             {messageNode}
 
             <Collapsible defaultOpen={true} label={msg("oauthGrantRequest")} frozen>
@@ -73,8 +73,8 @@ export default function LoginOauthGrant(props: PageProps<Extract<KcContext, { pa
             <form action={url.oauthAction} method="post">
                 <input type="hidden" name="code" value={oauth.code} />
                 <CDIActions layout="rowWrap">
-                    <CDIButton as="input" type="submit" name="accept" value={msgStr("doYes")} />
-                    <CDIButton as="input" secondary type="submit" name="cancel" value={msgStr("doNo")} />
+                    <CDIButton as="input" type="submit" name="accept" value={msgStr("cdiOauthGrantAccept")} />
+                    <CDIButton as="input" secondary type="submit" name="cancel" value={msgStr("cdiOauthGrantDeny")} />
                 </CDIActions>
             </form>
         </CdiTemplate>
