@@ -42,6 +42,7 @@ const LoginOauth2DeviceVerifyUserCode = lazy(
     () => import("./pages/LoginOauth2DeviceVerifyUserCode")
 );
 const LoginOtp = lazy(() => import("./pages/LoginOtp"));
+const LoginPageExpired = lazy(() => import("./pages/LoginPageExpired"));
 
 export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
@@ -243,6 +244,14 @@ export default function KcPage(props: { kcContext: KcContext }) {
                     case "login-otp.ftl":
                         return (
                             <LoginOtp
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                            />
+                        );
+                    case "login-page-expired.ftl":
+                        return (
+                            <LoginPageExpired
                                 {...{ kcContext, i18n, classes }}
                                 Template={Template}
                                 doUseDefaultCss={true}

@@ -75,7 +75,7 @@ Nice to have login theme pages:
 
 
 
--   [ ] login-page-expired.ftl
+
 -   [ ] login-passkeys-conditional-authenticate.ftl
 -   [ ] login-recovery-authn-code-config.ftl
 -   [ ] login-recovery-authn-code-input.ftl
@@ -86,6 +86,7 @@ Nice to have login theme pages:
 -   [ ] select-authenticator.ftl
 -   [ ] select-organization.ftl
 -   [ ] update-email.ftl
+-   [x] login-page-expired.ftl
 -   [x] code.ftl
 -   [x] delete-account-confirm.ftl
 -   [x] delete-credential.ftl
