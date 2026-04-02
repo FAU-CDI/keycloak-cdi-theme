@@ -46,6 +46,7 @@ const LoginOauth2DeviceVerifyUserCode = lazy(
 const LoginOtp = lazy(() => import("./pages/LoginOtp"));
 const LoginResetOtp = lazy(() => import("./pages/LoginResetOtp"));
 const SelectAuthenticator = lazy(() => import("./pages/SelectAuthenticator"));
+const SelectOrganization = lazy(() => import("./pages/SelectOrganization"));
 const LoginPageExpired = lazy(() => import("./pages/LoginPageExpired"));
 const LoginPasskeysConditionalAuthenticate = lazy(
     () => import("./pages/LoginPasskeysConditionalAuthenticate")
@@ -290,6 +291,14 @@ export default function KcPage(props: { kcContext: KcContext }) {
                     case "select-authenticator.ftl":
                         return (
                             <SelectAuthenticator
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={false}
+                            />
+                        );
+                    case "select-organization.ftl":
+                        return (
+                            <SelectOrganization
                                 {...{ kcContext, i18n, classes }}
                                 Template={Template}
                                 doUseDefaultCss={false}
