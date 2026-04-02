@@ -75,7 +75,6 @@ Nice to have login theme pages:
 
 
 
--   [ ] select-authenticator.ftl
 -   [ ] select-organization.ftl
 -   [ ] update-email.ftl
 -   [x] code.ftl
@@ -108,6 +107,7 @@ Nice to have login theme pages:
 -   [x] logout-confirm.ftl
 -   [x] register.ftl
 -   [x] saml-post-form.ftl
+-   [x] select-authenticator.ftl
 -   [x] terms.ftl
 -   [x] webauthn-authenticate.ftl
 -   [x] webauthn-error.ftl
