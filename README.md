@@ -74,11 +74,12 @@ You can customize this behavior, see documentation [here](https://docs.keycloaki
 Nice to have login theme pages:
 
 
--   [ ] login-x509-info.ftl
+
 -   [ ] logout-confirm.ftl
 -   [ ] select-authenticator.ftl
 -   [ ] select-organization.ftl
 -   [ ] update-email.ftl
+-   [x] login-x509-info.ftl
 -   [x] code.ftl
 -   [x] delete-account-confirm.ftl
 -   [x] delete-credential.ftl

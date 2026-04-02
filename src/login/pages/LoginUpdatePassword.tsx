@@ -10,9 +10,7 @@ import { CDIActions, CDIButton } from "../components/CDIButton";
 
 import styles from "../components/CdiLoginPage.module.css";
 
-export default function LoginUpdatePassword(
-    props: PageProps<Extract<KcContext, { pageId: "login-update-password.ftl" }>, I18n>
-) {
+export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, { pageId: "login-update-password.ftl" }>, I18n>) {
     const { kcContext, i18n } = props;
 
     const { url, messagesPerField, isAppInitiatedAction } = kcContext;
@@ -26,10 +24,7 @@ export default function LoginUpdatePassword(
     const hasPasswordConfirmError = messagesPerField.existsError("password-confirm");
 
     const showMessage = kcContext.message !== undefined && !hasPasswordOrConfirmError;
-    const messageNode =
-        showMessage && kcContext.message ? (
-            <MessageAlert type={kcContext.message.type} summary={kcContext.message.summary} />
-        ) : null;
+    const messageNode = showMessage && kcContext.message ? <MessageAlert type={kcContext.message.type} summary={kcContext.message.summary} /> : null;
 
     return (
         <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} headerNode={msg("updatePasswordTitle")}>
