@@ -74,18 +74,11 @@ You can customize this behavior, see documentation [here](https://docs.keycloaki
 Nice to have login theme pages:
 
 
-
-
-
--   [ ] login-reset-otp.ftl
--   [ ] login-update-password.ftl
 -   [ ] login-x509-info.ftl
 -   [ ] logout-confirm.ftl
 -   [ ] select-authenticator.ftl
 -   [ ] select-organization.ftl
 -   [ ] update-email.ftl
--   [x] login-recovery-authn-code-config.ftl
--   [x] login-page-expired.ftl
 -   [x] code.ftl
 -   [x] delete-account-confirm.ftl
 -   [x] delete-credential.ftl
@@ -101,9 +94,13 @@ Nice to have login theme pages:
 -   [x] login-oauth-grant.ftl
 -   [x] login-oauth2-device-verify-user-code.ftl
 -   [x] login-otp.ftl
--   [x] login-password.ftl
+-   [x] login-page-expired.ftl
 -   [x] login-passkeys-conditional-authenticate.ftl
+-   [x] login-password.ftl
+-   [x] login-recovery-authn-code-config.ftl
+-   [x] login-reset-otp.ftl
 -   [x] login-reset-password.ftl
+-   [x] login-update-password.ftl
 -   [x] login-update-profile.ftl
 -   [x] login-username.ftl
 -   [x] login-verify-email.ftl
