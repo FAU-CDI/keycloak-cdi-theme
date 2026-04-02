@@ -1,12 +1,12 @@
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
-import { Fragment, useId, useState } from "react";
+import { useId, useState } from "react";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
 import Collapsible from "../components/Collapsible";
 import MessageAlert from "../components/MessageAlert";
-import BoxedListItem from "../components/BoxedListItem";
+import OtpCredentialRadioList from "../components/OtpCredentialRadioList";
 import { CDIActions, CDIButton } from "../components/CDIButton";
 
 import styles from "../components/CdiLoginPage.module.css";
@@ -43,46 +43,11 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
             >
                 {otpLogin.userOtpCredentials.length > 1 && (
                     <Collapsible frozen defaultOpen={true} label={msg("loginOtpSelectAuthenticator")}>
-                        <ul
-                            style={{
-                                margin: 0,
-                                padding: 0,
-                                listStyle: "none",
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: "0.75rem"
-                            }}
-                        >
-                            {otpLogin.userOtpCredentials.map((otpCredential, index) => {
-                                const inputId = `${otpCredentialInputIdPrefix}-${index}`;
-                                return (
-                                    <Fragment key={otpCredential.id}>
-                                        <BoxedListItem>
-                                            <label
-                                                htmlFor={inputId}
-                                                style={{
-                                                    display: "flex",
-                                                    alignItems: "center",
-                                                    gap: "0.75rem",
-                                                    margin: 0,
-                                                    fontWeight: 500,
-                                                    cursor: "pointer"
-                                                }}
-                                            >
-                                                <input
-                                                    id={inputId}
-                                                    type="radio"
-                                                    name="selectedCredentialId"
-                                                    value={otpCredential.id}
-                                                    defaultChecked={otpCredential.id === otpLogin.selectedCredentialId}
-                                                />
-                                                <span>{otpCredential.userLabel}</span>
-                                            </label>
-                                        </BoxedListItem>
-                                    </Fragment>
-                                );
-                            })}
-                        </ul>
+                        <OtpCredentialRadioList
+                            credentials={otpLogin.userOtpCredentials}
+                            selectedCredentialId={otpLogin.selectedCredentialId}
+                            idPrefix={otpCredentialInputIdPrefix}
+                        />
                     </Collapsible>
                 )}
 

@@ -5,28 +5,29 @@ import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
 import MessageAlert from "../components/MessageAlert";
+import OtpCredentialRadioList from "../components/OtpCredentialRadioList";
 import { CDIActions, CDIButton } from "../components/CDIButton";
 
 import styles from "../components/CdiLoginPage.module.css";
 
-export default function LoginRecoveryAuthnCodeInput(props: PageProps<Extract<KcContext, { pageId: "login-recovery-authn-code-input.ftl" }>, I18n>) {
+export default function LoginResetOtp(props: PageProps<Extract<KcContext, { pageId: "login-reset-otp.ftl" }>, I18n>) {
     const { kcContext, i18n } = props;
 
-    const { url, messagesPerField, recoveryAuthnCodesInputBean } = kcContext;
+    const { url, messagesPerField, configuredOtpCredentials } = kcContext;
 
     const { msg, msgStr } = i18n;
 
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const recoveryInputId = useId();
+    const credentialInputIdPrefix = useId();
 
-    const hasFieldError = messagesPerField.existsError("recoveryCodeInput");
+    const hasTotpError = messagesPerField.existsError("totp");
 
-    const showMessage = kcContext.message !== undefined && !hasFieldError;
+    const showMessage = kcContext.message !== undefined && !hasTotpError;
     const messageNode = showMessage && kcContext.message ? <MessageAlert type={kcContext.message.type} summary={kcContext.message.summary} /> : null;
 
     return (
-        <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} headerNode={msg("auth-recovery-code-header")}>
+        <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} headerNode={msg("doLogIn")}>
             {messageNode}
 
             <form
@@ -39,29 +40,27 @@ export default function LoginRecoveryAuthnCodeInput(props: PageProps<Extract<KcC
                 }}
             >
                 <div>
-                    <label htmlFor={recoveryInputId}>{msg("auth-recovery-code-prompt", `${recoveryAuthnCodesInputBean.codeNumber}`)}</label>
-                    {hasFieldError && (
+                    <p style={{ margin: "0 0 1rem" }}>{msg("otp-reset-description")}</p>
+
+                    {hasTotpError && (
                         <div
                             role="alert"
                             aria-live="polite"
                             dangerouslySetInnerHTML={{
-                                __html: kcSanitize(messagesPerField.get("recoveryCodeInput"))
+                                __html: kcSanitize(messagesPerField.get("totp"))
                             }}
                         />
                     )}
-                    <input
-                        tabIndex={1}
-                        id={recoveryInputId}
-                        name="recoveryCodeInput"
-                        aria-invalid={hasFieldError}
-                        autoComplete="off"
-                        type="text"
-                        autoFocus
+
+                    <OtpCredentialRadioList
+                        credentials={configuredOtpCredentials.userOtpCredentials}
+                        selectedCredentialId={configuredOtpCredentials.selectedCredentialId}
+                        idPrefix={credentialInputIdPrefix}
                     />
                 </div>
 
                 <CDIActions layout="rowWrap">
-                    <CDIButton as="input" name="login" type="submit" value={msgStr("doLogIn")} disabled={isSubmitting} />
+                    <CDIButton as="input" id="kc-otp-reset-form-submit" type="submit" value={msgStr("doSubmit")} disabled={isSubmitting} />
                 </CDIActions>
             </form>
         </CdiTemplate>
