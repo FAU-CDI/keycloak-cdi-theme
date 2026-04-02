@@ -33,6 +33,7 @@ const DeleteAccountConfirm = lazy(() => import("./pages/DeleteAccountConfirm"));
 const DeleteCredential = lazy(() => import("./pages/DeleteCredential"));
 const FrontchannelLogout = lazy(() => import("./pages/FrontchannelLogout"));
 const LinkIdpAction = lazy(() => import("./pages/LinkIdpAction"));
+const LogoutConfirm = lazy(() => import("./pages/LogoutConfirm"));
 const LoginConfigTotp = lazy(() => import("./pages/LoginConfigTotp"));
 const LoginIdpLinkConfirmOverride = lazy(
     () => import("./pages/LoginIdpLinkConfirmOverride")
@@ -220,6 +221,14 @@ export default function KcPage(props: { kcContext: KcContext }) {
                         return (
                             <LinkIdpAction
                                 {...{ kcContext, i18n, classes }}
+                                doUseDefaultCss={false}
+                            />
+                        );
+                    case "logout-confirm.ftl":
+                        return (
+                            <LogoutConfirm
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
                                 doUseDefaultCss={false}
                             />
                         );

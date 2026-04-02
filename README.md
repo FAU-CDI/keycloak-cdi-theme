@@ -75,11 +75,9 @@ Nice to have login theme pages:
 
 
 
--   [ ] logout-confirm.ftl
 -   [ ] select-authenticator.ftl
 -   [ ] select-organization.ftl
 -   [ ] update-email.ftl
--   [x] login-x509-info.ftl
 -   [x] code.ftl
 -   [x] delete-account-confirm.ftl
 -   [x] delete-credential.ftl
@@ -105,7 +103,9 @@ Nice to have login theme pages:
 -   [x] login-update-profile.ftl
 -   [x] login-username.ftl
 -   [x] login-verify-email.ftl
+-   [x] login-x509-info.ftl
 -   [x] login.ftl
+-   [x] logout-confirm.ftl
 -   [x] register.ftl
 -   [x] saml-post-form.ftl
 -   [x] terms.ftl
