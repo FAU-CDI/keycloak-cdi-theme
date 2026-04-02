@@ -50,9 +50,7 @@ export default function LoginOauthGrant(props: PageProps<Extract<KcContext, { pa
             </Collapsible>
 
             {(client.attributes.tosUri || client.attributes.policyUri) && (
-                <Collapsible
-                    label={msg("cdiOauthGrantInformation", applicationName)}
-                >
+                <Collapsible label={msg("cdiOauthGrantInformation", applicationName)}>
                     <CDIActions layout="rowWrap">
                         {client.attributes.tosUri && (
                             <CDIButton as="a" secondary href={client.attributes.tosUri} target="_blank" rel="noreferrer">

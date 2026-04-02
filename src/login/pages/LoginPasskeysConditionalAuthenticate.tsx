@@ -25,18 +25,10 @@ export default function LoginPasskeysConditionalAuthenticate(
     useScript({ authButtonId, kcContext, i18n });
 
     const showMessage = kcContext.message !== undefined;
-    const messageNode =
-        showMessage && kcContext.message ? (
-            <MessageAlert type={kcContext.message.type} summary={kcContext.message.summary} />
-        ) : null;
+    const messageNode = showMessage && kcContext.message ? <MessageAlert type={kcContext.message.type} summary={kcContext.message.summary} /> : null;
 
     return (
-        <CdiTemplate
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={false}
-            headerNode={msg("passkey-login-title")}
-        >
+        <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} headerNode={msg("passkey-login-title")}>
             {messageNode}
 
             <form id="webauth" action={url.loginAction} method="post">
@@ -52,22 +44,12 @@ export default function LoginPasskeysConditionalAuthenticate(
                 <>
                     <form id="authn_select">
                         {authenticators.authenticators.map((authenticator, i) => (
-                            <input
-                                key={i}
-                                type="hidden"
-                                name="authn_use_chk"
-                                readOnly
-                                value={authenticator.credentialId}
-                            />
+                            <input key={i} type="hidden" name="authn_use_chk" readOnly value={authenticator.credentialId} />
                         ))}
                     </form>
 
                     {shouldDisplayAuthenticators && (
-                        <Collapsible
-                            defaultOpen={true}
-                            frozen
-                            label={msg("passkey-available-authenticators")}
-                        >
+                        <Collapsible defaultOpen={true} frozen label={msg("passkey-available-authenticators")}>
                             <ul
                                 style={{
                                     margin: 0,
@@ -84,11 +66,7 @@ export default function LoginPasskeysConditionalAuthenticate(
                                             <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
                                                 <strong>{advancedMsg(authenticator.label)}</strong>
                                                 {authenticator.transports?.displayNameProperties?.length ? (
-                                                    <span>
-                                                        {authenticator.transports.displayNameProperties
-                                                            .map(p => advancedMsg(p))
-                                                            .join(", ")}
-                                                    </span>
+                                                    <span>{authenticator.transports.displayNameProperties.map(p => advancedMsg(p)).join(", ")}</span>
                                                 ) : null}
                                                 <span>
                                                     {msg("passkey-createdAt-label")} {authenticator.createdAt}
@@ -104,11 +82,7 @@ export default function LoginPasskeysConditionalAuthenticate(
             )}
 
             {realm.password && (
-                <form
-                    id="kc-form-login"
-                    action={url.loginAction}
-                    method="post"
-                >
+                <form id="kc-form-login" action={url.loginAction} method="post">
                     {!usernameHidden && (
                         <div className={styles.form}>
                             {messagesPerField.existsError("username") && (
@@ -135,13 +109,7 @@ export default function LoginPasskeysConditionalAuthenticate(
             )}
 
             <div id="kc-form-passkey-button" style={{ display: "none" }}>
-                <CDIButton
-                    as="input"
-                    id={authButtonId}
-                    type="button"
-                    autoFocus
-                    value={msgStr("passkey-doAuthenticate")}
-                />
+                <CDIButton as="input" id={authButtonId} type="button" autoFocus value={msgStr("passkey-doAuthenticate")} />
             </div>
         </CdiTemplate>
     );

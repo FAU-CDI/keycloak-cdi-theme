@@ -13,21 +13,10 @@ export default function LoginPageExpired(props: PageProps<Extract<KcContext, { p
     const { msg, msgStr } = i18n;
 
     const showMessage = kcContext.message !== undefined;
-    const messageNode =
-        showMessage && kcContext.message ? (
-            <MessageAlert
-                type={kcContext.message.type}
-                summary={kcContext.message.summary}
-            />
-        ) : null;
+    const messageNode = showMessage && kcContext.message ? <MessageAlert type={kcContext.message.type} summary={kcContext.message.summary} /> : null;
 
     return (
-        <CdiTemplate
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={false}
-            headerNode={msg("pageExpiredTitle")}
-        >
+        <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} headerNode={msg("pageExpiredTitle")}>
             {messageNode}
 
             <CDIActions layout="rowWrap">

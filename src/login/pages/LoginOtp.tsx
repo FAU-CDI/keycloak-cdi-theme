@@ -24,20 +24,12 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
     const otpCredentialInputIdPrefix = useId();
 
     const showMessage = kcContext.message !== undefined;
-    const messageNode =
-        showMessage && kcContext.message ? (
-            <MessageAlert type={kcContext.message.type} summary={kcContext.message.summary} />
-        ) : null;
+    const messageNode = showMessage && kcContext.message ? <MessageAlert type={kcContext.message.type} summary={kcContext.message.summary} /> : null;
 
     const hasTotpError = messagesPerField.existsError("totp");
 
     return (
-        <CdiTemplate
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={false}
-            headerNode={msg("doLogIn")}
-        >
+        <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} headerNode={msg("doLogIn")}>
             {messageNode}
 
             <form
@@ -50,11 +42,7 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
                 method="post"
             >
                 {otpLogin.userOtpCredentials.length > 1 && (
-                    <Collapsible
-                        frozen
-                        defaultOpen={true}
-                        label={msg("loginOtpSelectAuthenticator")}
-                    >
+                    <Collapsible frozen defaultOpen={true} label={msg("loginOtpSelectAuthenticator")}>
                         <ul
                             style={{
                                 margin: 0,
@@ -86,9 +74,7 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
                                                     type="radio"
                                                     name="selectedCredentialId"
                                                     value={otpCredential.id}
-                                                    defaultChecked={
-                                                        otpCredential.id === otpLogin.selectedCredentialId
-                                                    }
+                                                    defaultChecked={otpCredential.id === otpLogin.selectedCredentialId}
                                                 />
                                                 <span>{otpCredential.userLabel}</span>
                                             </label>
@@ -112,24 +98,11 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
 
                 <div>
                     <label htmlFor={otpInputId}>{msg("loginOtpOneTime")}</label>
-                    <input
-                        id={otpInputId}
-                        name="otp"
-                        autoComplete="off"
-                        type="text"
-                        autoFocus
-                        aria-invalid={hasTotpError}
-                    />
+                    <input id={otpInputId} name="otp" autoComplete="off" type="text" autoFocus aria-invalid={hasTotpError} />
                 </div>
 
                 <CDIActions layout="rowWrap">
-                    <CDIButton
-                        as="input"
-                        name="login"
-                        type="submit"
-                        value={msgStr("doLogIn")}
-                        disabled={isSubmitting}
-                    />
+                    <CDIButton as="input" name="login" type="submit" value={msgStr("doLogIn")} disabled={isSubmitting} />
                 </CDIActions>
             </form>
         </CdiTemplate>

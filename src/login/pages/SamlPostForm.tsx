@@ -6,10 +6,7 @@ import CdiTemplate from "../components/CdiTemplate";
 import { CDIActions, CDIButton } from "../components/CDIButton";
 
 export default function SamlPostForm(props: PageProps<Extract<KcContext, { pageId: "saml-post-form.ftl" }>, I18n>) {
-    const {
-        kcContext,
-        i18n,
-    } = props;
+    const { kcContext, i18n } = props;
 
     const { msgStr, msg } = i18n;
 

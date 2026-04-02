@@ -19,10 +19,7 @@ export default function LoginOauth2DeviceVerifyUserCode(
     const userCodeInputId = useId();
 
     const showMessage = message !== undefined;
-    const messageNode =
-        showMessage && message ? (
-            <MessageAlert type={message.type} summary={message.summary} />
-        ) : null;
+    const messageNode = showMessage && message ? <MessageAlert type={message.type} summary={message.summary} /> : null;
 
     return (
         <CdiTemplate kcContext={kcContext} i18n={i18n} headerNode={msg("oauth2DeviceVerificationTitle")}>
@@ -31,13 +28,7 @@ export default function LoginOauth2DeviceVerifyUserCode(
             <form className={styles.form} action={url.oauth2DeviceVerificationAction} method="post">
                 <div>
                     <label htmlFor={userCodeInputId}>{msg("verifyOAuth2DeviceUserCode")}</label>
-                    <input
-                        id={userCodeInputId}
-                        name="device_user_code"
-                        autoComplete="off"
-                        type="text"
-                        autoFocus
-                    />
+                    <input id={userCodeInputId} name="device_user_code" autoComplete="off" type="text" autoFocus />
                 </div>
 
                 <CDIActions layout="rowWrap">
