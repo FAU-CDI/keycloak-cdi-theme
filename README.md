@@ -73,10 +73,6 @@ You can customize this behavior, see documentation [here](https://docs.keycloaki
 
 Nice to have login theme pages:
 
-
-
--   [ ] select-organization.ftl
--   [ ] update-email.ftl
 -   [x] code.ftl
 -   [x] delete-account-confirm.ftl
 -   [x] delete-credential.ftl
@@ -108,7 +104,9 @@ Nice to have login theme pages:
 -   [x] register.ftl
 -   [x] saml-post-form.ftl
 -   [x] select-authenticator.ftl
+-   [x] select-organization.ftl
 -   [x] terms.ftl
+-   [x] update-email.ftl
 -   [x] webauthn-authenticate.ftl
 -   [x] webauthn-error.ftl
 -   [x] webauthn-register.ftl

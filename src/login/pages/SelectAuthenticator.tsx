@@ -41,10 +41,7 @@ export default function SelectAuthenticator(props: PageProps<Extract<KcContext, 
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const showMessage = kcContext.message !== undefined;
-    const messageNode =
-        showMessage && kcContext.message ? (
-            <MessageAlert type={kcContext.message.type} summary={kcContext.message.summary} />
-        ) : null;
+    const messageNode = showMessage && kcContext.message ? <MessageAlert type={kcContext.message.type} summary={kcContext.message.summary} /> : null;
 
     return (
         <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} headerNode={msg("loginChooseAuthenticator")}>
@@ -72,18 +69,12 @@ export default function SelectAuthenticator(props: PageProps<Extract<KcContext, 
                                     style={optionButtonStyle}
                                 >
                                     {authenticationSelection.iconCssClass ? (
-                                        <i
-                                            className={authenticationSelection.iconCssClass}
-                                            aria-hidden
-                                            style={{ flexShrink: 0, lineHeight: 1.25 }}
-                                        />
+                                        <i className={authenticationSelection.iconCssClass} aria-hidden style={{ flexShrink: 0, lineHeight: 1.25 }} />
                                     ) : (
                                         <span style={{ width: "1.25rem", flexShrink: 0 }} aria-hidden />
                                     )}
                                     <span style={{ flex: "1 1 auto", minWidth: 0 }}>
-                                        <span style={{ display: "block", fontWeight: 600 }}>
-                                            {advancedMsg(authenticationSelection.displayName)}
-                                        </span>
+                                        <span style={{ display: "block", fontWeight: 600 }}>{advancedMsg(authenticationSelection.displayName)}</span>
                                         <span
                                             style={{
                                                 display: "block",
@@ -108,17 +99,8 @@ export default function SelectAuthenticator(props: PageProps<Extract<KcContext, 
 
 function ChevronRightIcon() {
     return (
-        <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            aria-hidden
-            style={{ flexShrink: 0, marginTop: "0.125rem" }}
-        >
-            <path
-                fill="currentColor"
-                d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
-            />
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden style={{ flexShrink: 0, marginTop: "0.125rem" }}>
+            <path fill="currentColor" d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
         </svg>
     );
 }

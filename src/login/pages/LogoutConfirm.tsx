@@ -18,14 +18,7 @@ export default function LogoutConfirm(props: PageProps<Extract<KcContext, { page
             <form action={url.logoutConfirmAction} method="POST">
                 <input type="hidden" name="session_code" value={logoutConfirm.code} />
                 <CDIActions>
-                    <CDIButton
-                        as="input"
-                        tabIndex={4}
-                        name="confirmLogout"
-                        id="kc-logout"
-                        type="submit"
-                        value={msgStr("doLogout")}
-                    />
+                    <CDIButton as="input" tabIndex={4} name="confirmLogout" id="kc-logout" type="submit" value={msgStr("doLogout")} />
                 </CDIActions>
             </form>
 

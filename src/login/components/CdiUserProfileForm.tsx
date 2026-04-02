@@ -15,6 +15,8 @@ type KcContextWithProfile = {
 
 export type CdiUserProfileFormProps = {
     formRef?: ComponentPropsWithRef<"form">["ref"];
+    /** e.g. Keycloak `kc-update-email-form` for automation / compatibility */
+    formId?: string;
     action: string;
     isAppInitiatedAction?: boolean;
     i18n: I18n;
@@ -31,6 +33,7 @@ export type CdiUserProfileFormProps = {
 export default function CdiUserProfileForm(props: CdiUserProfileFormProps) {
     const {
         formRef,
+        formId,
         action,
         isAppInitiatedAction,
         i18n,
@@ -51,7 +54,13 @@ export default function CdiUserProfileForm(props: CdiUserProfileFormProps) {
     const disabled = !isFormSubmittable || !!isSubmitDisabled;
 
     return (
-        <form ref={formRef} className={styles.form} action={action} method="post">
+        <form
+            ref={formRef}
+            id={formId}
+            className={styles.form}
+            action={action}
+            method="post"
+        >
             <CdiUserProfileFormFields
                 kcContext={kcContext}
                 i18n={i18n}
