@@ -76,7 +76,6 @@ Nice to have login theme pages:
 
 
 
--   [ ] login-passkeys-conditional-authenticate.ftl
 -   [ ] login-recovery-authn-code-config.ftl
 -   [ ] login-recovery-authn-code-input.ftl
 -   [ ] login-reset-otp.ftl
@@ -103,6 +102,7 @@ Nice to have login theme pages:
 -   [x] login-oauth2-device-verify-user-code.ftl
 -   [x] login-otp.ftl
 -   [x] login-password.ftl
+-   [x] login-passkeys-conditional-authenticate.ftl
 -   [x] login-reset-password.ftl
 -   [x] login-update-profile.ftl
 -   [x] login-username.ftl

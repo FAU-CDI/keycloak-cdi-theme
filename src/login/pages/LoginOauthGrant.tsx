@@ -22,15 +22,15 @@ export default function LoginOauthGrant(props: PageProps<Extract<KcContext, { pa
         <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} headerNode={msg("cdiOauthGrantTitle", applicationName)}>
             {messageNode}
 
-            <Collapsible defaultOpen={true} label={msg("oauthGrantRequest")} frozen>
-                <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "nowrap" }}>
-                    {client.attributes.logoUri && (
-                        <img src={client.attributes.logoUri} alt="" style={{ maxWidth: "10rem", maxHeight: "3rem", height: "auto", width: "auto" }} />
-                    )}
-                    <p style={{ margin: 0, flex: "1 1 auto", minWidth: 0 }}>
-                        <strong>{applicationName}</strong> {msg("cdiOauthGrantIntroText")}
-                    </p>
-                </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "nowrap" }}>
+                {client.attributes.logoUri && (
+                    <img src={client.attributes.logoUri} alt="" style={{ maxWidth: "10rem", maxHeight: "3rem", height: "auto", width: "auto" }} />
+                )}
+                <p style={{ margin: 0, flex: "1 1 auto", minWidth: 0 }}>
+                    <strong>{applicationName}</strong> {msg("cdiOauthGrantIntroText")}
+                </p>
+            </div>
+            <Collapsible defaultOpen={true} label={msg("cdiOauthGrantRequest")}>
                 {oauth.clientScopesRequested.length > 0 ? (
                     <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
                         {oauth.clientScopesRequested.map((clientScope, idx) => (
@@ -51,9 +51,7 @@ export default function LoginOauthGrant(props: PageProps<Extract<KcContext, { pa
 
             {(client.attributes.tosUri || client.attributes.policyUri) && (
                 <Collapsible
-                    defaultOpen={true}
-                    label={client.name ? msg("oauthGrantInformation", advancedMsgStr(client.name)) : msg("oauthGrantInformation", client.clientId)}
-                    frozen
+                    label={msg("cdiOauthGrantInformation", applicationName)}
                 >
                     <CDIActions layout="rowWrap">
                         {client.attributes.tosUri && (
