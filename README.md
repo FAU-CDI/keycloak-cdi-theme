@@ -76,8 +76,7 @@ Nice to have login theme pages:
 
 
 
--   [ ] login-recovery-authn-code-config.ftl
--   [ ] login-recovery-authn-code-input.ftl
+
 -   [ ] login-reset-otp.ftl
 -   [ ] login-update-password.ftl
 -   [ ] login-x509-info.ftl
@@ -85,6 +84,7 @@ Nice to have login theme pages:
 -   [ ] select-authenticator.ftl
 -   [ ] select-organization.ftl
 -   [ ] update-email.ftl
+-   [x] login-recovery-authn-code-config.ftl
 -   [x] login-page-expired.ftl
 -   [x] code.ftl
 -   [x] delete-account-confirm.ftl

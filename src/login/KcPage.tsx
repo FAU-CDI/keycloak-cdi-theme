@@ -49,6 +49,9 @@ const LoginPasskeysConditionalAuthenticate = lazy(
 const LoginRecoveryAuthnCodeConfig = lazy(
     () => import("./pages/LoginRecoveryAuthnCodeConfig")
 );
+const LoginRecoveryAuthnCodeInput = lazy(
+    () => import("./pages/LoginRecoveryAuthnCodeInput")
+);
 
 export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
@@ -277,6 +280,14 @@ export default function KcPage(props: { kcContext: KcContext }) {
                                 {...{ kcContext, i18n, classes }}
                                 Template={Template}
                                 doUseDefaultCss={true}
+                            />
+                        );
+                    case "login-recovery-authn-code-input.ftl":
+                        return (
+                            <LoginRecoveryAuthnCodeInput
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={false}
                             />
                         );
                     default:
