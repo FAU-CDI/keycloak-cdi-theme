@@ -3,19 +3,21 @@ import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
-import MessageAlert from "../components/MessageAlert";
+import LogoutOtherSessionsCheckbox from "../components/LogoutOtherSessionsCheckbox";
 import { CDIButton } from "../components/CDIButton";
 
 import formStyles from "../components/CdiLoginPage.module.css";
+import pageContent from "../components/PageContent.module.css";
+import { useId } from "react";
 
 export default function WebauthnRegister(props: PageProps<Extract<KcContext, { pageId: "webauthn-register.ftl" }>, I18n>) {
     const { kcContext, i18n } = props;
 
-    const { url, isSetRetry, isAppInitiatedAction, message } = kcContext;
+    const { url, isSetRetry, isAppInitiatedAction } = kcContext;
 
     const { msg, msgStr } = i18n;
 
-    const authButtonId = "authenticateWebAuthnButton";
+    const authButtonId = useId();
 
     useScript({
         authButtonId,
@@ -23,12 +25,13 @@ export default function WebauthnRegister(props: PageProps<Extract<KcContext, { p
         i18n
     });
 
-    const showMessage = message !== undefined && (message.type !== "warning" || !isAppInitiatedAction);
-    const messageNode = showMessage && message ? <MessageAlert type={message.type} summary={message.summary} /> : null;
-
     return (
-        <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} displayMessage={true} headerNode={msg("webauthn-registration-title")}>
-            {messageNode}
+        <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} headerNode={msg("webauthn-registration-title")}>
+            {isSetRetry ? (
+                <p className={pageContent.webauthnRetryHint} role="status">
+                    {msg("cdiWebauthnRegisterRetryHint")}
+                </p>
+            ) : null}
             <form id="register" action={url.loginAction} method="post">
                 <input type="hidden" id="clientDataJSON" name="clientDataJSON" />
                 <input type="hidden" id="attestationObject" name="attestationObject" />
@@ -37,10 +40,8 @@ export default function WebauthnRegister(props: PageProps<Extract<KcContext, { p
                 <input type="hidden" id="transports" name="transports" />
                 <input type="hidden" id="error" name="error" />
 
-                <div className={formStyles.optionsRow} style={{ justifyContent: "flex-start" }}>
-                    <label htmlFor="logout-sessions">
-                        <input type="checkbox" id="logout-sessions" name="logout-sessions" value="on" defaultChecked /> {msg("logoutOtherSessions")}
-                    </label>
+                <div className={`${formStyles.optionsRow} ${formStyles.optionsRowStart}`}>
+                    <LogoutOtherSessionsCheckbox i18n={i18n} omitOuterWrapper />
                 </div>
 
                 <div className={formStyles.form}>
@@ -53,7 +54,7 @@ export default function WebauthnRegister(props: PageProps<Extract<KcContext, { p
             </form>
 
             {!isSetRetry && isAppInitiatedAction && (
-                <form action={url.loginAction} id="kc-webauthn-settings-form" method="post">
+                <form action={url.loginAction} method="post">
                     <div className={formStyles.form}>
                         <div>
                             <CDIButton secondary type="submit" id="cancelWebAuthnAIA" name="cancel-aia" value="true">
