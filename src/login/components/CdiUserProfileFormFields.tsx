@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import { Fragment, useEffect, useId } from "react";
 import type { Dispatch } from "react";
 import { assert } from "keycloakify/tools/assert";
@@ -169,14 +168,14 @@ function FieldRow(props: {
     const helpBeforeId = `${fieldId}-help-before`;
     const helpAfterId = `${fieldId}-help-after`;
 
-    const formGroupStyle: CSSProperties | undefined =
+    const hideFormGroup =
         attribute.annotations.inputType === "hidden" ||
-        (attribute.name === "password-confirm" && !doMakeUserConfirmPassword)
-            ? { display: "none" }
-            : undefined;
+        (attribute.name === "password-confirm" && !doMakeUserConfirmPassword);
 
     return (
-        <div className={styles.formGroup} style={formGroupStyle}>
+        <div
+            className={`${styles.formGroup}${hideFormGroup ? ` ${styles.formGroupHidden}` : ""}`}
+        >
             <div className={styles.labelWrapper}>
                 <label htmlFor={fieldId} className={styles.fieldLabel}>
                     {advancedMsg(attribute.displayName ?? "")}

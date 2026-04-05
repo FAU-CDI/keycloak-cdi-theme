@@ -5,6 +5,7 @@ import type { I18n, Key } from "../i18n";
 import type { KcContext } from "../KcContext";
 import DarkModeToggle from "./DarkModeToggle";
 import LocaleSwitcher from "./LocaleSwitcher";
+import MessageAlert from "./MessageAlert";
 
 import cdiLightLogo from "../images/cdi-light.svg";
 import cdiDarkLogo from "../images/cdi-dark.svg";
@@ -87,12 +88,37 @@ function getPreferredColorScheme(): boolean {
 }
 
 export default function CdiTemplate(props: TemplateProps<KcContext, I18n>) {
-    const { headerNode, documentTitle, kcContext, i18n, children } = props;
+    const {
+        headerNode,
+        documentTitle,
+        kcContext,
+        i18n,
+        children,
+        doUseDefaultCss,
+        displayMessage = true,
+        displayInfo = false,
+        infoNode = null,
+        socialProvidersNode = null
+    } = props;
 
     const { msgStr, currentLanguage, enabledLanguages } = i18n;
     const [isDark, setIsDark] = useState(getPreferredColorScheme);
 
     const { realm } = kcContext;
+
+    const message =
+        "message" in kcContext && kcContext.message !== undefined
+            ? kcContext.message
+            : undefined;
+    const isAppInitiatedAction =
+        "isAppInitiatedAction" in kcContext
+            ? kcContext.isAppInitiatedAction
+            : undefined;
+
+    const showTemplateMessage =
+        displayMessage &&
+        message !== undefined &&
+        (message.type !== "warning" || !isAppInitiatedAction);
 
     useEffect(() => {
         document.title =
@@ -100,7 +126,7 @@ export default function CdiTemplate(props: TemplateProps<KcContext, I18n>) {
     }, []);
 
     // if we're not ready to render, don't render!
-    const { isReadyToRender } = useInitialize({ kcContext, doUseDefaultCss: false });
+    const { isReadyToRender } = useInitialize({ kcContext, doUseDefaultCss });
 
     if (!isReadyToRender) {
         return null;
@@ -140,7 +166,14 @@ export default function CdiTemplate(props: TemplateProps<KcContext, I18n>) {
                         </div>
                         <h1>{headerNode}</h1>
                     </header>
-                    <main>{children}</main>
+                    <main>
+                        {showTemplateMessage && message !== undefined ? (
+                            <MessageAlert type={message.type} summary={message.summary} />
+                        ) : null}
+                        {children}
+                        {socialProvidersNode}
+                        {displayInfo ? <div className={styles.infoSlot}>{infoNode}</div> : null}
+                    </main>
                     <footer>
                         {CDI_FOOTER_ROWS.map((row, rowIndex) => (
                             <div key={rowIndex} className={styles.footerRow}>

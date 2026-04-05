@@ -1,0 +1,242 @@
+/* Shared page content primitives — avoid inline styles on pages. */
+
+.hidden {
+    display: none !important;
+}
+
+.webauthnRetryHint {
+    margin: 0 0 1rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--cdi-foreground);
+}
+
+.oauthClientHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: nowrap;
+}
+
+.oauthClientLogo {
+    max-width: 10rem;
+    max-height: 3rem;
+    height: auto;
+    width: auto;
+}
+
+.oauthClientIntro {
+    margin: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.stackedListPlain {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.paragraphFlat {
+    margin: 0;
+}
+
+/* Select organization / authenticator */
+.selectListColumn {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.selectListGrid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    gap: 0.75rem;
+}
+
+.optionButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    color: var(--cdi-foreground);
+    font: inherit;
+}
+
+.optionButtonAlignStart {
+    align-items: flex-start;
+}
+
+.optionButtonTitle {
+    font-weight: 600;
+}
+
+.optionButtonBody {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.optionButtonTitleBlock {
+    display: block;
+    font-weight: 600;
+}
+
+.optionButtonMeta {
+    display: block;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    opacity: 0.92;
+}
+
+.optionButtonIcon {
+    flex-shrink: 0;
+    line-height: 1.25;
+}
+
+.optionButtonIconSpacer {
+    width: 1.25rem;
+    flex-shrink: 0;
+}
+
+.chevronIcon {
+    flex-shrink: 0;
+}
+
+.chevronIconOffset {
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+}
+
+/* WebAuthn authenticate */
+.webauthnAuthenticatorList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.webauthnAuthenticatorLabel {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.webauthnDetailGrid {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.25rem 0.5rem;
+    align-items: baseline;
+}
+
+.webauthnMetaLabel {
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+/* Passkeys conditional authenticate */
+.passkeyAuthenticatorList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.passkeyAuthenticatorBody {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* Recovery codes config */
+.recoveryCodesOrderedList {
+    margin: 1rem 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.recoveryCodeIndex {
+    font-weight: 600;
+}
+
+.recoveryCodeMono {
+    font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        "Liberation Mono",
+        "Courier New",
+        monospace;
+}
+
+.formBlockVertical {
+    margin: 1rem 0;
+}
+
+.confirmationLabelOffset {
+    margin-left: 0.5rem;
+}
+
+.inlineCheckboxRow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.proseAfterHeader {
+    margin: 0 0 1rem;
+}
+
+.proseBeforeActions {
+    margin: 1rem 0 0;
+}
+
+/* X509 / monospace values */
+.x509Value {
+    margin: 0.25rem 0 0;
+    word-break: break-all;
+    font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        "Liberation Mono",
+        "Courier New",
+        monospace;
+}
+
+/* Frontchannel logout */
+.frontchannelClientList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.frontchannelClientName {
+    font-weight: 600;
+}

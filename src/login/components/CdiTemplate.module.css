@@ -152,6 +152,10 @@
     border-bottom: 2px solid var(--cdi-border);
 }
 
+.infoSlot {
+    margin-top: 0.25rem;
+}
+
 /* ----- Footer ----- */
 .root footer {
     margin-top: 0.75rem;

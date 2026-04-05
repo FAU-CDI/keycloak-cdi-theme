@@ -1,9 +1,9 @@
 import { useId, useState } from "react";
+import { useScript as useWebAuthnConditionalLoginScript } from "keycloakify/login/pages/Login.useScript";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import Collapsible from "./Collapsible";
-import MessageAlert from "./MessageAlert";
 import CdiTemplate from "./CdiTemplate";
 import PasswordInputWithReveal from "./PasswordInputWithReveal";
 import { CDIButton } from "./CDIButton";
@@ -55,16 +55,10 @@ type WebAuthnAuthenticators = {
     authenticators: { credentialId: string }[];
 };
 
-type KcMessage = {
-    type: "success" | "warning" | "error" | "info";
-    summary: string;
-};
-
 export type CdiLoginPageProps = {
     kcContext: LoginishKcContext;
     i18n: I18n;
     variant: CdiLoginVariant;
-    webAuthnButtonId: string;
     providersRequirePassword?: boolean;
     renderWebAuthnInsideNativeLogin?: boolean;
     webAuthnRequiresPasswordEnabled?: boolean;
@@ -75,7 +69,6 @@ export default function CdiLoginPage(props: CdiLoginPageProps) {
         kcContext,
         i18n,
         variant,
-        webAuthnButtonId,
         providersRequirePassword = false,
         renderWebAuthnInsideNativeLogin = false,
         webAuthnRequiresPasswordEnabled = true
@@ -102,23 +95,10 @@ export default function CdiLoginPage(props: CdiLoginPageProps) {
             : undefined;
     const registrationDisabled =
         "registrationDisabled" in kcContext ? kcContext.registrationDisabled : false;
-    const message = ("message" in kcContext ? kcContext.message : undefined) as
-        | KcMessage
-        | undefined;
-    const isAppInitiatedAction = (
-        "isAppInitiatedAction" in kcContext ? kcContext.isAppInitiatedAction : undefined
-    ) as boolean | undefined;
     const enableWebAuthnConditionalUI =
         "enableWebAuthnConditionalUI" in kcContext
             ? kcContext.enableWebAuthnConditionalUI
             : undefined;
-
-    const showMessage =
-        message !== undefined && (message.type !== "warning" || !isAppInitiatedAction);
-    const messageNode =
-        showMessage && message ? (
-            <MessageAlert type={message.type} summary={message.summary} />
-        ) : null;
 
     const errorFields =
         variant === "usernamePassword"
@@ -152,9 +132,9 @@ export default function CdiLoginPage(props: CdiLoginPageProps) {
         (!webAuthnRequiresPasswordEnabled || isPasswordEnabled);
 
     const webAuthnConditionalSection = showWebAuthnConditionalSection ? (
-        <WebAuthnConditionalSection
+        <WebAuthnConditionalLoginSection
+            kcContext={kcContext}
             url={url}
-            webAuthnButtonId={webAuthnButtonId}
             authenticators={authenticators}
             i18n={i18n}
         />
@@ -197,10 +177,8 @@ export default function CdiLoginPage(props: CdiLoginPageProps) {
             kcContext={kcContext}
             i18n={i18n}
             doUseDefaultCss={false}
-            displayMessage={true}
             headerNode={<HeaderNode realm={realm} />}
         >
-            {messageNode}
             <p>{msg("cdiWelcomeText")}</p>
             {providersLogin}
             {nativeLogin}
@@ -238,6 +216,75 @@ type LoginFormProps = {
     i18n: I18n;
 };
 
+function UsernameField(props: {
+    variant: CdiLoginVariant;
+    realm: RealmLike;
+    login: LoginLike | undefined;
+    usernameHidden?: boolean;
+    enableWebAuthnConditionalUI?: boolean;
+    hasFieldError: boolean;
+    i18n: I18n;
+}) {
+    const { variant, realm, login, usernameHidden, enableWebAuthnConditionalUI, hasFieldError, i18n } = props;
+    const { msg } = i18n;
+    const usernameId = useId();
+
+    if (variant === "password" || usernameHidden) {
+        return null;
+    }
+
+    return (
+        <div>
+            <label htmlFor={usernameId}>
+                {!realm.loginWithEmailAllowed
+                    ? msg("username")
+                    : !realm.registrationEmailAsUsername
+                      ? msg("usernameOrEmail")
+                      : msg("email")}
+            </label>
+            <input
+                tabIndex={2}
+                id={usernameId}
+                name="username"
+                defaultValue={login?.username ?? ""}
+                type="text"
+                autoFocus
+                autoComplete={enableWebAuthnConditionalUI ? "username webauthn" : "username"}
+                aria-invalid={hasFieldError}
+            />
+        </div>
+    );
+}
+
+function RememberMeField(props: {
+    variant: CdiLoginVariant;
+    realm: RealmLike;
+    login: LoginLike | undefined;
+    usernameHidden?: boolean;
+    i18n: I18n;
+}) {
+    const { variant, realm, login, usernameHidden, i18n } = props;
+    const { msg } = i18n;
+    const rememberMeId = useId();
+
+    if (!realm.rememberMe || usernameHidden || variant === "password") {
+        return null;
+    }
+
+    return (
+        <label htmlFor={rememberMeId}>
+            <input
+                tabIndex={variant === "usernamePassword" ? 5 : 3}
+                id={rememberMeId}
+                name="rememberMe"
+                type="checkbox"
+                defaultChecked={!!login?.rememberMe}
+            />{" "}
+            {msg("rememberMe")}
+        </label>
+    );
+}
+
 function LoginForm(props: LoginFormProps) {
     const {
         variant,
@@ -254,9 +301,6 @@ function LoginForm(props: LoginFormProps) {
 
     const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
 
-    const usernameId = useId();
-    const rememberMeId = useId();
-
     const hasFieldError =
         variant === "usernamePassword"
             ? messagesPerField.existsError("username", "password")
@@ -271,30 +315,17 @@ function LoginForm(props: LoginFormProps) {
               ? ["username"]
               : ["password"];
 
-    const usernameField =
-        variant !== "password" && !usernameHidden ? (
-            <div>
-                <label htmlFor={usernameId}>
-                    {!realm.loginWithEmailAllowed
-                        ? msg("username")
-                        : !realm.registrationEmailAsUsername
-                          ? msg("usernameOrEmail")
-                          : msg("email")}
-                </label>
-                <input
-                    tabIndex={2}
-                    id={usernameId}
-                    name="username"
-                    defaultValue={login?.username ?? ""}
-                    type="text"
-                    autoFocus
-                    autoComplete={
-                        enableWebAuthnConditionalUI ? "username webauthn" : "username"
-                    }
-                    aria-invalid={hasFieldError}
-                />
-            </div>
-        ) : null;
+    const usernameField = (
+        <UsernameField
+            variant={variant}
+            realm={realm}
+            login={login}
+            usernameHidden={usernameHidden}
+            enableWebAuthnConditionalUI={enableWebAuthnConditionalUI}
+            hasFieldError={hasFieldError}
+            i18n={i18n}
+        />
+    );
 
     const passwordField =
         variant === "usernamePassword" || variant === "password" ? (
@@ -305,19 +336,15 @@ function LoginForm(props: LoginFormProps) {
             />
         ) : null;
 
-    const rememberMe =
-        realm.rememberMe && !usernameHidden && variant !== "password" ? (
-            <label htmlFor={rememberMeId}>
-                <input
-                    tabIndex={variant === "usernamePassword" ? 5 : 3}
-                    id={rememberMeId}
-                    name="rememberMe"
-                    type="checkbox"
-                    defaultChecked={!!login?.rememberMe}
-                />{" "}
-                {msg("rememberMe")}
-            </label>
-        ) : null;
+    const rememberMe = (
+        <RememberMeField
+            variant={variant}
+            realm={realm}
+            login={login}
+            usernameHidden={usernameHidden}
+            i18n={i18n}
+        />
+    );
 
     const forgotPassword =
         realm.resetPasswordAllowed && url.loginResetCredentialsUrl ? (
@@ -326,10 +353,13 @@ function LoginForm(props: LoginFormProps) {
             </a>
         ) : null;
 
+    const showRememberMe =
+        realm.rememberMe && !usernameHidden && variant !== "password";
+
     const optionsRow =
-        rememberMe !== null || forgotPassword !== null ? (
+        showRememberMe || forgotPassword !== null ? (
             <div className={styles.optionsRow}>
-                {rememberMe}
+                {showRememberMe ? rememberMe : null}
                 {forgotPassword}
             </div>
         ) : null;
@@ -381,16 +411,19 @@ function LoginForm(props: LoginFormProps) {
     );
 }
 
-type WebAuthnConditionalSectionProps = {
+type WebAuthnConditionalLoginSectionProps = {
+    kcContext: LoginishKcContext;
     url: { loginAction: string };
-    webAuthnButtonId: string;
     authenticators?: WebAuthnAuthenticators;
     i18n: I18n;
 };
 
-function WebAuthnConditionalSection(props: WebAuthnConditionalSectionProps) {
-    const { url, webAuthnButtonId, authenticators, i18n } = props;
+function WebAuthnConditionalLoginSection(props: WebAuthnConditionalLoginSectionProps) {
+    const { kcContext, url, authenticators, i18n } = props;
     const { msgStr } = i18n;
+
+    const webAuthnButtonId = useId();
+    useWebAuthnConditionalLoginScript({ webAuthnButtonId, kcContext, i18n });
 
     return (
         <>

@@ -112,6 +112,10 @@
     gap: 0.5rem;
 }
 
+.optionsRowStart {
+    justify-content: flex-start;
+}
+
 .optionsRow label,
 .optionsRow a {
     font-size: 0.9375rem;

@@ -1,6 +1,8 @@
 import { Fragment } from "react";
 import BoxedListItem from "./BoxedListItem";
 
+import styles from "./OtpCredentialRadioList.module.css";
+
 export type OtpCredentialItem = { id: string; userLabel: string };
 
 type OtpCredentialRadioListProps = {
@@ -9,35 +11,17 @@ type OtpCredentialRadioListProps = {
     idPrefix: string;
 };
 
-const listStyle = {
-    margin: 0,
-    padding: 0,
-    listStyle: "none" as const,
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "0.75rem"
-};
-
-const labelStyle = {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.75rem",
-    margin: 0,
-    fontWeight: 500,
-    cursor: "pointer"
-};
-
 export default function OtpCredentialRadioList(props: OtpCredentialRadioListProps) {
     const { credentials, selectedCredentialId, idPrefix } = props;
 
     return (
-        <ul style={listStyle}>
+        <ul className={styles.list}>
             {credentials.map((otpCredential, index) => {
                 const inputId = `${idPrefix}-${index}`;
                 return (
                     <Fragment key={otpCredential.id}>
                         <BoxedListItem>
-                            <label htmlFor={inputId} style={labelStyle}>
+                            <label htmlFor={inputId} className={styles.radioLabel}>
                                 <input
                                     id={inputId}
                                     type="radio"
