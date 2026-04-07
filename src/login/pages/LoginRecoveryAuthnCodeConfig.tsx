@@ -7,6 +7,8 @@ import MessageAlert from "../components/MessageAlert";
 import BoxedListItem from "../components/BoxedListItem";
 import { CDIActions, CDIButton } from "../components/CDIButton";
 import Collapsible from "../components/Collapsible";
+import LogoutOtherSessionsCheckbox from "../components/LogoutOtherSessionsCheckbox";
+import pageContent from "../components/PageContent.module.css";
 
 export default function LoginRecoveryAuthnCodeConfig(props: PageProps<Extract<KcContext, { pageId: "login-recovery-authn-code-config.ftl" }>, I18n>) {
     const { kcContext, i18n } = props;
@@ -19,37 +21,18 @@ export default function LoginRecoveryAuthnCodeConfig(props: PageProps<Extract<Kc
 
     useScript({ olRecoveryCodesListId, i18n });
 
-    const showMessage = kcContext.message !== undefined;
-    const messageNode = showMessage && kcContext.message ? <MessageAlert type={kcContext.message.type} summary={kcContext.message.summary} /> : null;
-
     return (
         <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} headerNode={msg("recovery-code-config-header")}>
-            {messageNode}
-
             <Collapsible frozen defaultOpen={true} label={msgStr("cdiRecoveryCodes")}>
                 <MessageAlert
                     type="warning"
                     summary={`${msgStr("recovery-code-config-warning-title")} ${msgStr("recovery-code-config-warning-message")}`}
                 />
-                <ol
-                    id={olRecoveryCodesListId}
-                    style={{
-                        margin: "1rem 0",
-                        padding: 0,
-                        listStyle: "none",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.5rem"
-                    }}
-                >
+                <ol id={olRecoveryCodesListId} className={pageContent.recoveryCodesOrderedList}>
                     {recoveryAuthnCodesConfigBean.generatedRecoveryAuthnCodesList.map((code, index) => (
                         <BoxedListItem key={index}>
-                            <span style={{ fontWeight: 600 }}>{index + 1}.</span>{" "}
-                            <span
-                                style={{
-                                    fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace"
-                                }}
-                            >
+                            <span className={pageContent.recoveryCodeIndex}>{index + 1}.</span>{" "}
+                            <span className={pageContent.recoveryCodeMono}>
                                 {code.slice(0, 4)}-{code.slice(4, 8)}-{code.slice(8)}
                             </span>
                         </BoxedListItem>
@@ -71,19 +54,19 @@ export default function LoginRecoveryAuthnCodeConfig(props: PageProps<Extract<Kc
             </CDIActions>
 
             {/* confirmation checkbox */}
-            <div style={{ margin: "1rem 0" }}>
-                <input
-                    type="checkbox"
-                    id="kcRecoveryCodesConfirmationCheck"
-                    name="kcRecoveryCodesConfirmationCheck"
-                    onChange={event => {
-                        //@ts-expect-error: This is inherited from the original code
-                        document.getElementById("saveRecoveryAuthnCodesBtn").disabled = !event.target.checked;
-                    }}
-                />
-                <label htmlFor="kcRecoveryCodesConfirmationCheck" style={{ marginLeft: "0.5rem" }}>
-                    {msg("recovery-codes-confirmation-message")}
-                </label>
+            <div className={pageContent.formBlockVertical}>
+                <span className={pageContent.inlineCheckboxRow}>
+                    <input
+                        type="checkbox"
+                        id="kcRecoveryCodesConfirmationCheck"
+                        name="kcRecoveryCodesConfirmationCheck"
+                        onChange={event => {
+                            //@ts-expect-error: This is inherited from the original code
+                            document.getElementById("saveRecoveryAuthnCodesBtn").disabled = !event.target.checked;
+                        }}
+                    />
+                    <label htmlFor="kcRecoveryCodesConfirmationCheck">{msg("recovery-codes-confirmation-message")}</label>
+                </span>
             </div>
 
             <form action={kcContext.url.loginAction} id="kc-recovery-codes-settings-form" method="post">
@@ -91,7 +74,7 @@ export default function LoginRecoveryAuthnCodeConfig(props: PageProps<Extract<Kc
                 <input type="hidden" name="generatedAt" value={recoveryAuthnCodesConfigBean.generatedAt} />
                 <input type="hidden" id="userLabel" name="userLabel" value={msgStr("recovery-codes-label-default")} />
 
-                <LogoutOtherSessions i18n={i18n} />
+                <LogoutOtherSessionsCheckbox i18n={i18n} wrapperId="kc-form-options" />
 
                 {isAppInitiatedAction ? (
                     <CDIActions layout="rowWrap">
@@ -119,19 +102,5 @@ export default function LoginRecoveryAuthnCodeConfig(props: PageProps<Extract<Kc
                 )}
             </form>
         </CdiTemplate>
-    );
-}
-
-function LogoutOtherSessions(props: { i18n: I18n }) {
-    const { i18n } = props;
-    const { msg } = i18n;
-
-    return (
-        <div id="kc-form-options" style={{ margin: "1rem 0" }}>
-            <label style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
-                <input type="checkbox" id="logout-sessions" name="logout-sessions" value="on" defaultChecked={true} />
-                <span>{msg("logoutOtherSessions")}</span>
-            </label>
-        </div>
     );
 }

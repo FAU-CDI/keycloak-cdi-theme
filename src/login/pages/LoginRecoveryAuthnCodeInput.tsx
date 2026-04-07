@@ -4,7 +4,6 @@ import { useId, useState } from "react";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
-import MessageAlert from "../components/MessageAlert";
 import { CDIActions, CDIButton } from "../components/CDIButton";
 
 import styles from "../components/CdiLoginPage.module.css";
@@ -22,13 +21,14 @@ export default function LoginRecoveryAuthnCodeInput(props: PageProps<Extract<KcC
 
     const hasFieldError = messagesPerField.existsError("recoveryCodeInput");
 
-    const showMessage = kcContext.message !== undefined && !hasFieldError;
-    const messageNode = showMessage && kcContext.message ? <MessageAlert type={kcContext.message.type} summary={kcContext.message.summary} /> : null;
-
     return (
-        <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} headerNode={msg("auth-recovery-code-header")}>
-            {messageNode}
-
+        <CdiTemplate
+            kcContext={kcContext}
+            i18n={i18n}
+            doUseDefaultCss={false}
+            displayMessage={!hasFieldError}
+            headerNode={msg("auth-recovery-code-header")}
+        >
             <form
                 className={styles.form}
                 action={url.loginAction}

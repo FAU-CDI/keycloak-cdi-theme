@@ -4,11 +4,11 @@ import { useId, useState } from "react";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
-import MessageAlert from "../components/MessageAlert";
 import OtpCredentialRadioList from "../components/OtpCredentialRadioList";
 import { CDIActions, CDIButton } from "../components/CDIButton";
 
 import styles from "../components/CdiLoginPage.module.css";
+import pageContent from "../components/PageContent.module.css";
 
 export default function LoginResetOtp(props: PageProps<Extract<KcContext, { pageId: "login-reset-otp.ftl" }>, I18n>) {
     const { kcContext, i18n } = props;
@@ -23,13 +23,8 @@ export default function LoginResetOtp(props: PageProps<Extract<KcContext, { page
 
     const hasTotpError = messagesPerField.existsError("totp");
 
-    const showMessage = kcContext.message !== undefined && !hasTotpError;
-    const messageNode = showMessage && kcContext.message ? <MessageAlert type={kcContext.message.type} summary={kcContext.message.summary} /> : null;
-
     return (
-        <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} headerNode={msg("doLogIn")}>
-            {messageNode}
-
+        <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} displayMessage={!hasTotpError} headerNode={msg("doLogIn")}>
             <form
                 className={styles.form}
                 action={url.loginAction}
@@ -40,7 +35,7 @@ export default function LoginResetOtp(props: PageProps<Extract<KcContext, { page
                 }}
             >
                 <div>
-                    <p style={{ margin: "0 0 1rem" }}>{msg("otp-reset-description")}</p>
+                    <p className={pageContent.proseAfterHeader}>{msg("otp-reset-description")}</p>
 
                     {hasTotpError && (
                         <div

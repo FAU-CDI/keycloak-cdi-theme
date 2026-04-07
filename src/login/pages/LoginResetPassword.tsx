@@ -3,7 +3,6 @@ import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
-import MessageAlert from "../components/MessageAlert";
 import styles from "../components/CdiLoginPage.module.css";
 import { CDIButton } from "../components/CDIButton";
 
@@ -13,7 +12,7 @@ type LoginResetPasswordProps = Omit<PageProps<LoginResetPasswordKcContext, I18n>
 export default function LoginResetPassword(props: LoginResetPasswordProps) {
     const { kcContext, i18n } = props;
 
-    const { url, realm, auth, messagesPerField, message } = kcContext;
+    const { url, realm, auth, messagesPerField } = kcContext;
 
     const { msg, msgStr } = i18n;
 
@@ -28,8 +27,6 @@ export default function LoginResetPassword(props: LoginResetPasswordProps) {
             displayMessage={!showUsernameError}
             headerNode={msg("emailForgotTitle")}
         >
-            {message && <MessageAlert type={message.type} summary={message.summary} />}
-
             <p>{realm.duplicateEmailsAllowed ? msg("emailInstructionUsername") : msg("emailInstruction")}</p>
 
             <form id="kc-reset-password-form" className={styles.form} action={url.loginAction} method="post">

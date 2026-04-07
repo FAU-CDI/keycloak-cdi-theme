@@ -11,7 +11,9 @@ export default function OauthGrantClientHeader(props: OauthGrantClientHeaderProp
 
     return (
         <div className={pageContent.oauthClientHeader}>
-            {logoUri ? <img src={logoUri} alt="" className={pageContent.oauthClientLogo} /> : null}
+            {logoUri ? (
+                <img src={logoUri} alt="" className={pageContent.oauthClientLogo} />
+            ) : null}
             <p className={pageContent.oauthClientIntro}>{children}</p>
         </div>
     );

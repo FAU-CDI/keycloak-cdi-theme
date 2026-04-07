@@ -5,7 +5,6 @@ import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
 import CdiUserProfileForm from "../components/CdiUserProfileForm";
-import MessageAlert from "../components/MessageAlert";
 import { CDIButton } from "../components/CDIButton";
 
 type RegisterKcContext = Extract<KcContext, { pageId: "register.ftl" }>;
@@ -33,22 +32,13 @@ export default function Register(props: RegisterProps) {
         };
     }, []);
 
-    const message = ("message" in kcContext ? kcContext.message : undefined) as
-        | { type: "success" | "warning" | "error" | "info"; summary: string }
-        | undefined;
-    const isAppInitiatedAction = ("isAppInitiatedAction" in kcContext ? kcContext.isAppInitiatedAction : undefined) as boolean | undefined;
-    const showMessage = message !== undefined && (message.type !== "warning" || !isAppInitiatedAction);
-    const messageNode = showMessage && message ? <MessageAlert type={message.type} summary={message.summary} /> : null;
-
     return (
         <CdiTemplate
             kcContext={kcContext}
             i18n={i18n}
             doUseDefaultCss={false}
-            displayMessage={true}
             headerNode={messageHeader !== undefined ? advancedMsg(messageHeader) : msg("registerTitle")}
         >
-            {messageNode}
             <CdiUserProfileForm
                 formRef={registerFormRef}
                 action={url.registrationAction}

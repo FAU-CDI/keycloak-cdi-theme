@@ -5,7 +5,6 @@ import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
 import Collapsible from "../components/Collapsible";
-import MessageAlert from "../components/MessageAlert";
 import OtpCredentialRadioList from "../components/OtpCredentialRadioList";
 import { CDIActions, CDIButton } from "../components/CDIButton";
 
@@ -23,15 +22,10 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
     const otpInputId = useId();
     const otpCredentialInputIdPrefix = useId();
 
-    const showMessage = kcContext.message !== undefined;
-    const messageNode = showMessage && kcContext.message ? <MessageAlert type={kcContext.message.type} summary={kcContext.message.summary} /> : null;
-
     const hasTotpError = messagesPerField.existsError("totp");
 
     return (
-        <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} headerNode={msg("doLogIn")}>
-            {messageNode}
-
+        <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} displayMessage={!hasTotpError} headerNode={msg("doLogIn")}>
             <form
                 className={styles.form}
                 action={url.loginAction}

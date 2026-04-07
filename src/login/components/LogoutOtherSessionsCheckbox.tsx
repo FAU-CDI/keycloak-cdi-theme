@@ -14,13 +14,26 @@ export type LogoutOtherSessionsCheckboxProps = {
 /**
  * “Sign out from other devices” checkbox used on password update, email update, recovery codes, etc.
  */
-export default function LogoutOtherSessionsCheckbox(props: LogoutOtherSessionsCheckboxProps) {
-    const { i18n, inputId = "logout-sessions", wrapperId, omitOuterWrapper = false } = props;
+export default function LogoutOtherSessionsCheckbox(
+    props: LogoutOtherSessionsCheckboxProps
+) {
+    const {
+        i18n,
+        inputId = "logout-sessions",
+        wrapperId,
+        omitOuterWrapper = false
+    } = props;
     const { msg } = i18n;
 
     const row = (
         <label className={pageContent.inlineCheckboxRow} htmlFor={inputId}>
-            <input type="checkbox" id={inputId} name="logout-sessions" value="on" defaultChecked={true} />
+            <input
+                type="checkbox"
+                id={inputId}
+                name="logout-sessions"
+                value="on"
+                defaultChecked={true}
+            />
             <span>{msg("logoutOtherSessions")}</span>
         </label>
     );

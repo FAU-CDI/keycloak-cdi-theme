@@ -4,7 +4,7 @@ import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
 import MessageAlert from "../components/MessageAlert";
-import { CDIButton } from "../components/CDIButton";
+import { CDIActions, CDIButton } from "../components/CDIButton";
 
 type InfoKcContext = Extract<KcContext, { pageId: "info.ftl" }>;
 type InfoProps = Omit<PageProps<InfoKcContext, I18n>, "Template">;
@@ -74,7 +74,7 @@ export default function Info(props: InfoProps) {
             {message && <MessageAlert type={messageType} summary={message.summary} />}
             {requiredActionsNode}
 
-            {primaryActionNode && <div>{primaryActionNode}</div>}
+            {primaryActionNode ? <CDIActions layout="rowWrap">{primaryActionNode}</CDIActions> : null}
         </CdiTemplate>
     );
 }

@@ -5,6 +5,7 @@ import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
 import BoxedListItem from "../components/BoxedListItem";
 import { CDIButton } from "../components/CDIButton";
+import pageContent from "../components/PageContent.module.css";
 
 type FrontchannelLogoutKcContext = Extract<KcContext, { pageId: "frontchannel-logout.ftl" }>;
 type FrontchannelLogoutProps = Omit<PageProps<FrontchannelLogoutKcContext, I18n>, "Template">;
@@ -42,13 +43,13 @@ export default function FrontchannelLogout(props: FrontchannelLogoutProps) {
             <p>{msg("frontchannel-logout.message")}</p>
 
             {logout.clients.length > 0 && (
-                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: "0.75rem" }}>
+                <ul className={pageContent.frontchannelClientList}>
                     {logout.clients.map(client => (
                         <BoxedListItem key={client.name}>
-                            <div style={{ fontWeight: 600 }}>{client.name}</div>
+                            <div className={pageContent.frontchannelClientName}>{client.name}</div>
                             <iframe
                                 src={client.frontChannelLogoutUrl}
-                                style={{ display: "none" }}
+                                className={pageContent.hidden}
                                 onLoad={() => {
                                     setIframeLoadCount(count => count + 1);
                                 }}

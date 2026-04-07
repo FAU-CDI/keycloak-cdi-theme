@@ -225,7 +225,15 @@ function UsernameField(props: {
     hasFieldError: boolean;
     i18n: I18n;
 }) {
-    const { variant, realm, login, usernameHidden, enableWebAuthnConditionalUI, hasFieldError, i18n } = props;
+    const {
+        variant,
+        realm,
+        login,
+        usernameHidden,
+        enableWebAuthnConditionalUI,
+        hasFieldError,
+        i18n
+    } = props;
     const { msg } = i18n;
     const usernameId = useId();
 
@@ -249,7 +257,9 @@ function UsernameField(props: {
                 defaultValue={login?.username ?? ""}
                 type="text"
                 autoFocus
-                autoComplete={enableWebAuthnConditionalUI ? "username webauthn" : "username"}
+                autoComplete={
+                    enableWebAuthnConditionalUI ? "username webauthn" : "username"
+                }
                 aria-invalid={hasFieldError}
             />
         </div>
@@ -353,8 +363,7 @@ function LoginForm(props: LoginFormProps) {
             </a>
         ) : null;
 
-    const showRememberMe =
-        realm.rememberMe && !usernameHidden && variant !== "password";
+    const showRememberMe = realm.rememberMe && !usernameHidden && variant !== "password";
 
     const optionsRow =
         showRememberMe || forgotPassword !== null ? (

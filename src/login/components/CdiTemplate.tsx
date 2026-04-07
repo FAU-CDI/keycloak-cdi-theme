@@ -111,9 +111,7 @@ export default function CdiTemplate(props: TemplateProps<KcContext, I18n>) {
             ? kcContext.message
             : undefined;
     const isAppInitiatedAction =
-        "isAppInitiatedAction" in kcContext
-            ? kcContext.isAppInitiatedAction
-            : undefined;
+        "isAppInitiatedAction" in kcContext ? kcContext.isAppInitiatedAction : undefined;
 
     const showTemplateMessage =
         displayMessage &&
@@ -172,7 +170,9 @@ export default function CdiTemplate(props: TemplateProps<KcContext, I18n>) {
                         ) : null}
                         {children}
                         {socialProvidersNode}
-                        {displayInfo ? <div className={styles.infoSlot}>{infoNode}</div> : null}
+                        {displayInfo ? (
+                            <div className={styles.infoSlot}>{infoNode}</div>
+                        ) : null}
                     </main>
                     <footer>
                         {CDI_FOOTER_ROWS.map((row, rowIndex) => (

@@ -4,12 +4,12 @@ import { useScript } from "keycloakify/login/pages/LoginPasskeysConditionalAuthe
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
-import MessageAlert from "../components/MessageAlert";
 import Collapsible from "../components/Collapsible";
 import BoxedListItem from "../components/BoxedListItem";
 import { CDIButton } from "../components/CDIButton";
 
 import styles from "../components/CdiLoginPage.module.css";
+import pageContent from "../components/PageContent.module.css";
 
 export default function LoginPasskeysConditionalAuthenticate(
     props: PageProps<Extract<KcContext, { pageId: "login-passkeys-conditional-authenticate.ftl" }>, I18n>
@@ -18,19 +18,10 @@ export default function LoginPasskeysConditionalAuthenticate(
 
     const { messagesPerField, login, url, usernameHidden, shouldDisplayAuthenticators, authenticators, realm } = kcContext;
 
-    const { msg, msgStr, advancedMsg } = i18n;
-
-    const authButtonId = useId();
-
-    useScript({ authButtonId, kcContext, i18n });
-
-    const showMessage = kcContext.message !== undefined;
-    const messageNode = showMessage && kcContext.message ? <MessageAlert type={kcContext.message.type} summary={kcContext.message.summary} /> : null;
+    const { msg, advancedMsg } = i18n;
 
     return (
         <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} headerNode={msg("passkey-login-title")}>
-            {messageNode}
-
             <form id="webauth" action={url.loginAction} method="post">
                 <input type="hidden" id="clientDataJSON" name="clientDataJSON" />
                 <input type="hidden" id="authenticatorData" name="authenticatorData" />
@@ -50,20 +41,11 @@ export default function LoginPasskeysConditionalAuthenticate(
 
                     {shouldDisplayAuthenticators && (
                         <Collapsible defaultOpen={true} frozen label={msg("passkey-available-authenticators")}>
-                            <ul
-                                style={{
-                                    margin: 0,
-                                    padding: 0,
-                                    listStyle: "none",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    gap: "0.75rem"
-                                }}
-                            >
+                            <ul className={pageContent.passkeyAuthenticatorList}>
                                 {authenticators.authenticators.map((authenticator, i) => (
                                     <Fragment key={i}>
                                         <BoxedListItem>
-                                            <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+                                            <div className={pageContent.passkeyAuthenticatorBody}>
                                                 <strong>{advancedMsg(authenticator.label)}</strong>
                                                 {authenticator.transports?.displayNameProperties?.length ? (
                                                     <span>{authenticator.transports.displayNameProperties.map(p => advancedMsg(p)).join(", ")}</span>
@@ -108,9 +90,23 @@ export default function LoginPasskeysConditionalAuthenticate(
                 </form>
             )}
 
-            <div id="kc-form-passkey-button" style={{ display: "none" }}>
-                <CDIButton as="input" id={authButtonId} type="button" autoFocus value={msgStr("passkey-doAuthenticate")} />
-            </div>
+            <PasskeyConditionalAuthenticateInput kcContext={kcContext} i18n={i18n} />
         </CdiTemplate>
+    );
+}
+
+type PasskeysPageKcContext = Extract<KcContext, { pageId: "login-passkeys-conditional-authenticate.ftl" }>;
+
+function PasskeyConditionalAuthenticateInput(props: { kcContext: PasskeysPageKcContext; i18n: I18n }) {
+    const { kcContext, i18n } = props;
+    const { msgStr } = i18n;
+
+    const authButtonId = useId();
+    useScript({ authButtonId, kcContext, i18n });
+
+    return (
+        <div id="kc-form-passkey-button" className={pageContent.hidden}>
+            <CDIButton as="input" id={authButtonId} type="button" autoFocus value={msgStr("passkey-doAuthenticate")} />
+        </div>
     );
 }

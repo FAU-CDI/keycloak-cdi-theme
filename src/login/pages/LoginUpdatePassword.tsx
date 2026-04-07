@@ -4,9 +4,9 @@ import { useState } from "react";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
-import MessageAlert from "../components/MessageAlert";
 import { PasswordFieldWithReveal } from "../components/PasswordInputWithReveal";
 import { CDIActions, CDIButton } from "../components/CDIButton";
+import LogoutOtherSessionsCheckbox from "../components/LogoutOtherSessionsCheckbox";
 
 import styles from "../components/CdiLoginPage.module.css";
 
@@ -23,13 +23,14 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
     const hasPasswordError = messagesPerField.existsError("password");
     const hasPasswordConfirmError = messagesPerField.existsError("password-confirm");
 
-    const showMessage = kcContext.message !== undefined && !hasPasswordOrConfirmError;
-    const messageNode = showMessage && kcContext.message ? <MessageAlert type={kcContext.message.type} summary={kcContext.message.summary} /> : null;
-
     return (
-        <CdiTemplate kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} headerNode={msg("updatePasswordTitle")}>
-            {messageNode}
-
+        <CdiTemplate
+            kcContext={kcContext}
+            i18n={i18n}
+            doUseDefaultCss={false}
+            displayMessage={!hasPasswordOrConfirmError}
+            headerNode={msg("updatePasswordTitle")}
+        >
             <form
                 id="kc-passwd-update-form"
                 className={styles.form}
@@ -87,7 +88,7 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
                     )}
                 </div>
 
-                <LogoutOtherSessions i18n={i18n} />
+                <LogoutOtherSessionsCheckbox i18n={i18n} />
 
                 <CDIActions layout={isAppInitiatedAction ? "rowWrap" : undefined}>
                     <CDIButton as="input" type="submit" value={msgStr("doSubmit")} disabled={isSubmitting} />
@@ -99,19 +100,5 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
                 </CDIActions>
             </form>
         </CdiTemplate>
-    );
-}
-
-function LogoutOtherSessions(props: { i18n: I18n }) {
-    const { i18n } = props;
-    const { msg } = i18n;
-
-    return (
-        <div style={{ margin: "1rem 0" }}>
-            <label style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
-                <input type="checkbox" id="logout-sessions" name="logout-sessions" value="on" defaultChecked={true} />
-                <span>{msg("logoutOtherSessions")}</span>
-            </label>
-        </div>
     );
 }

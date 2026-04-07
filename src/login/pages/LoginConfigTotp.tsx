@@ -3,7 +3,6 @@ import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
-import MessageAlert from "../components/MessageAlert";
 import { CDIActions, CDIButton } from "../components/CDIButton";
 import BoxedListItem from "../components/BoxedListItem";
 import Collapsible from "../components/Collapsible";
@@ -22,12 +21,9 @@ const TOTP_APP_SUGGESTIONS: { label: string; href: string }[] = [
 export default function LoginConfigTotp(props: LoginConfigTotpProps) {
     const { kcContext, i18n } = props;
 
-    const { url, isAppInitiatedAction, totp, mode, messagesPerField } = kcContext;
+    const { url, totp, mode, messagesPerField, isAppInitiatedAction } = kcContext;
 
     const { msg, msgStr } = i18n;
-
-    const showMessage = kcContext.message !== undefined && (kcContext.message.type !== "warning" || !isAppInitiatedAction);
-    const messageNode = showMessage && kcContext.message ? <MessageAlert type={kcContext.message.type} summary={kcContext.message.summary} /> : null;
 
     const totpError = messagesPerField.existsError("totp") ? messagesPerField.get("totp") : "";
     const userLabelError = messagesPerField.existsError("userLabel") ? messagesPerField.get("userLabel") : "";
@@ -40,8 +36,6 @@ export default function LoginConfigTotp(props: LoginConfigTotpProps) {
             displayMessage={!messagesPerField.existsError("totp", "userLabel")}
             headerNode={msg("loginTotpTitle")}
         >
-            {messageNode}
-
             <ol className={styles.steps}>
                 <BoxedListItem>
                     <p>{msg("loginTotpStep1")}</p>
@@ -68,7 +62,7 @@ export default function LoginConfigTotp(props: LoginConfigTotpProps) {
                             </p>
                         </BoxedListItem>
                         <BoxedListItem>
-                            <Collapsible defaultOpen={true} label={msg("loginTotpManualStep3")}>
+                            <Collapsible frozen defaultOpen={true} label={msg("loginTotpManualStep3")}>
                                 <ul className={styles.policyList}>
                                     <li>
                                         {msg("loginTotpType")}: {msg(`loginTotp.${totp.policy.type}`)}
