@@ -22,6 +22,9 @@ export default function LoginVerifyEmail(props: LoginVerifyEmailProps) {
                 &nbsp;
                 {msg("emailVerifyInstruction3")}
             </p>
+            <p>
+                {msg("cdiVerifyEmailSupport")}
+            </p>
         </CdiTemplate>
     );
 }
