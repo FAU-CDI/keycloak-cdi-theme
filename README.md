@@ -30,7 +30,7 @@ npm run storybook
 
 # Inside an actual keycloak.
 # This needs docker and maven.
-npx keycloak
+npx run keycloak
 ```
 
 ### Building the theme
@@ -47,10 +47,10 @@ npm run build-keycloak-theme
 
 ```bash
 # to add a new story to develop
-npx keycloakify add-story
+npm run keycloakify add-story
 
 # to fully customize a template
-npx keycloakify eject-page
+npm run keycloakify eject-page
 ```
 
 # Building the theme
@@ -114,8 +114,8 @@ Nice to have login theme pages:
 Nice to have: - account theme - email theme
 
 ```bash
-npx keycloakify initialize-account-theme
-npx keycloakify initialize-email-theme
+npm run keycloakify initialize-account-theme
+npm run keycloakify initialize-email-theme
 ```
 
 ## LICENSE
