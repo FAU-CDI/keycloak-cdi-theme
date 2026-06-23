@@ -44,6 +44,8 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             cdiRecoveryCodes: "Recovery Codes",
             cdiWebauthnRegisterRetryHint:
                 "You can try registering your passkey again. Use the button below when you are ready.",
+            cdiUnverifiedEmail:
+                "Unverified accounts will be deleted after 24 - 36 hours.",
             cdiVerifyEmailSupport:
                 "Entered the wrong email address or encountered any other problems? Contact support using the button to change the address or get further assistance."
         },
@@ -85,6 +87,8 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             cdiRecoveryCodes: "Wiederherstellungscodes",
             cdiWebauthnRegisterRetryHint:
                 "Sie können die Passkey-Registrierung erneut versuchen. Nutzen Sie dazu die Schaltfläche unten, wenn Sie soweit sind.",
+            cdiUnverifiedEmail:
+                "Unverifizierte Accounts werden nach 24 - 36 Stunden gelöscht.",
             cdiVerifyEmailSupport:
                 "Falsche E-Mail Adresse eingegeben oder andere Probleme? Kontaktieren Sie den Support mithilfe des Buttons, um die Addresse zu ändern oder um weitere Hilfe zu erhalten."
         }
