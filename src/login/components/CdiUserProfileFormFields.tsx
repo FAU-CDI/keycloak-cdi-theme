@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useId } from "react";
-import type { Dispatch } from "react";
+import type { Dispatch, ReactNode } from "react";
 import { assert } from "keycloakify/tools/assert";
 import type { Attribute } from "keycloakify/login/KcContext";
 import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFormFieldsProps";
@@ -14,7 +14,9 @@ import {
 import styles from "./CdiUserProfileForm.module.css";
 import { PasswordFieldWithReveal } from "./PasswordInputWithReveal";
 
-export type CdiUserProfileFormFieldsProps = Omit<UserProfileFormFieldsProps, "kcClsx">;
+export type CdiUserProfileFormFieldsProps = Omit<UserProfileFormFieldsProps, "kcClsx"> & {
+    emailFieldHint?: ReactNode;
+};
 
 const noopKcClsx: KcClsx = () => "";
 
@@ -24,6 +26,7 @@ export default function CdiUserProfileFormFields(props: CdiUserProfileFormFields
         i18n,
         onIsFormSubmittableValueChange,
         doMakeUserConfirmPassword,
+        emailFieldHint,
         BeforeField,
         AfterField
     } = props;
@@ -70,6 +73,7 @@ export default function CdiUserProfileFormFields(props: CdiUserProfileFormFields
                         dispatchFormAction={dispatchFormAction}
                         doMakeUserConfirmPassword={doMakeUserConfirmPassword}
                         i18n={i18n}
+                        emailFieldHint={emailFieldHint}
                         AfterField={AfterField}
                     />
                 </Fragment>
@@ -151,6 +155,7 @@ function FieldRow(props: {
     dispatchFormAction: (action: FormAction) => void;
     doMakeUserConfirmPassword: boolean;
     i18n: CdiUserProfileFormFieldsProps["i18n"];
+    emailFieldHint?: CdiUserProfileFormFieldsProps["emailFieldHint"];
     AfterField?: CdiUserProfileFormFieldsProps["AfterField"];
 }) {
     const {
@@ -160,6 +165,7 @@ function FieldRow(props: {
         dispatchFormAction,
         doMakeUserConfirmPassword,
         i18n,
+        emailFieldHint,
         AfterField
     } = props;
     const { advancedMsg } = i18n;
@@ -205,6 +211,7 @@ function FieldRow(props: {
                     displayableErrors={displayableErrors}
                     fieldIndex={undefined}
                 />
+                {attribute.name === "email" ? emailFieldHint : null}
                 {attribute.annotations.inputHelperTextAfter !== undefined && (
                     <div
                         className={styles.helperText}

@@ -3,6 +3,7 @@ import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import CdiTemplate from "../components/CdiTemplate";
 import CdiUserProfileForm from "../components/CdiUserProfileForm";
+import styles from "../components/CdiUserProfileForm.module.css";
 
 type IdpReviewUserProfileKcContext = Extract<KcContext, { pageId: "idp-review-user-profile.ftl" }>;
 type IdpReviewUserProfileProps = Omit<PageProps<IdpReviewUserProfileKcContext, I18n>, "Template">;
@@ -20,6 +21,11 @@ export default function IdpReviewUserProfile(props: IdpReviewUserProfileProps) {
                 i18n={i18n}
                 doMakeUserConfirmPassword={true}
                 kcContext={kcContext}
+                emailFieldHint={
+                    <div className={styles.warningBox} aria-live="polite">
+                        {msg("cdiOrganizationalEmailHint")}
+                    </div>
+                }
             />
         </CdiTemplate>
     );

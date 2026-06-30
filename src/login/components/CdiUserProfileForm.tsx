@@ -22,6 +22,7 @@ export type CdiUserProfileFormProps = {
     i18n: I18n;
     doMakeUserConfirmPassword: boolean;
     kcContext: KcContextWithProfile;
+    emailFieldHint?: ReactNode;
     introNode?: ReactNode;
     extraNode?: ReactNode;
     footerNode?: ReactNode;
@@ -39,6 +40,7 @@ export default function CdiUserProfileForm(props: CdiUserProfileFormProps) {
         i18n,
         doMakeUserConfirmPassword,
         kcContext,
+        emailFieldHint,
         introNode,
         extraNode,
         footerNode,
@@ -66,6 +68,7 @@ export default function CdiUserProfileForm(props: CdiUserProfileFormProps) {
                 i18n={i18n}
                 onIsFormSubmittableValueChange={setIsFormSubmittable}
                 doMakeUserConfirmPassword={doMakeUserConfirmPassword}
+                emailFieldHint={emailFieldHint}
             />
             {introNode !== undefined ? (
                 <p className={styles.formIntro}>{introNode}</p>

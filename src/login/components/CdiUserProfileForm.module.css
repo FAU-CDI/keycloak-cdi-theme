@@ -16,10 +16,6 @@
 }
 
 /* ----- Field groups ----- */
-.formGroup {
-    /* spacing from .form > div */
-}
-
 .formGroupHidden {
     display: none;
 }
@@ -137,6 +133,20 @@
     font-size: 0.875rem;
     line-height: 1.4;
     color: var(--cdi-foreground);
+}
+
+.warningBox {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    border-radius: 0;
+    border: 1px solid var(--cdi-warning-border);
+    background: var(--cdi-warning-bg);
+    color: var(--cdi-warning-text);
 }
 
 .fieldError {

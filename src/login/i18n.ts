@@ -47,7 +47,9 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             cdiUnverifiedEmail:
                 "Accounts with an unverified email address will be deleted after 24 - 36 hours.",
             cdiVerifyEmailSupport:
-                "Entered the wrong email address or encountered any other problems? Contact support using the button to change the address or get further assistance."
+                "Entered the wrong email address or encountered any other problems? Contact support using the button to change the address or get further assistance.",
+            cdiOrganizationalEmailHint:
+                "Please use your organizational email address instead of your personal email address to avoid problems with verification."
         },
         de: {
             cdiSelectInstitution: "Institution wählen",
@@ -90,7 +92,9 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             cdiUnverifiedEmail:
                 "Accounts mit einer unverifizierten E-Mail Adresse werden nach 24 - 36 Stunden gelöscht.",
             cdiVerifyEmailSupport:
-                "Falsche E-Mail Adresse eingegeben oder andere Probleme? Kontaktieren Sie den Support mithilfe des Buttons, um die Addresse zu ändern oder um weitere Hilfe zu erhalten."
+                "Falsche E-Mail Adresse eingegeben oder andere Probleme? Kontaktieren Sie den Support mithilfe des Buttons, um die Addresse zu ändern oder um weitere Hilfe zu erhalten.",
+            cdiOrganizationalEmailHint:
+                "Bitte verwenden Sie Ihre institutionelle E-Mail-Adresse anstelle von Ihrer privaten E-Mail-Adresse, um Probleme bei der Verifizierung zu vermeiden."
         }
     })
     .build();
